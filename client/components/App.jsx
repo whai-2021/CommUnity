@@ -1,3 +1,4 @@
+import '../index.css'
 import React, {useState, useEffect} from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom'
 import Nav from './Nav'
