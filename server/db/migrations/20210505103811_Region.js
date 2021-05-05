@@ -1,11 +1,10 @@
-
-exports.up = function(knex) {
-    return knex.schema.createTable('Region', (table) => {
-        table.increments('Id').primary()
-        table.string('Region_Name')
-    })
+exports.up = function (knex) {
+  return knex.schema.createTable('region', (table) => {
+    table.increments('id').primary()
+    table.string('name')
+  })
 }
 
-exports.down = function(knex) {
-    return knex.schema.dropTable('Region')
-};
+exports.down = function (knex) {
+  return knex.schema.dropTable('region')
+}

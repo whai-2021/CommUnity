@@ -1,13 +1,12 @@
+exports.up = function (knex) {
+  return knex.schema.createTable('posts', (table) => {
+    table.increments('id')
+    table.integer('author_id')
+    table.text('body')
+    table.timestamp('created_at')
+  })
+}
 
-exports.up = function(knex) {
-    return knex.schema.createTable('Posts', (table) => {
-        table.increments('Id')
-        table.integer('Author_Id')
-        table.text('Body')
-        table.timestamp('Created_At')  
-    })
-};
-
-exports.down = function(knex) {
-    return knex.schema.dropTable('Posts')
-};
+exports.down = function (knex) {
+  return knex.schema.dropTable('posts')
+}

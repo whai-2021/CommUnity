@@ -1,15 +1,14 @@
-
-exports.up = function(knex) {
-    return knex.schema.createTable('Users', (table) => {
-        table.increments('Id').primary()
-        table.string('Surname')
-        table.string('Given_Name') 
-        table.string('Username')
-        table.binary('Password_Hash')
-        table.string('Email')
-    })
+exports.up = function (knex) {
+  return knex.schema.createTable('users', (table) => {
+    table.increments('id').primary()
+    table.string('last_name')
+    table.string('first_name')
+    table.string('username')
+    table.binary('password_hash')
+    table.string('email')
+  })
 }
 
-exports.down = function(knex) {
-    return knex.schema.dropTable('Users')
-};
+exports.down = function (knex) {
+  return knex.schema.dropTable('users')
+}

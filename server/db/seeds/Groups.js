@@ -1,13 +1,12 @@
-
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('Groups').del()
+  return knex('groups').del()
     .then(function () {
       // Inserts seed entries
-      return knex('Groups').insert([
-        {id: 1, Name: 'Apa Sherpa', Region_Id: 'Auckland'},
-        {id: 2, Name: 'Izzy Asper', Region_Id: 'Auckland'},
-        {id: 3, Name: 'Khaled Shaya', Region_Id: 'Auckland'}
-      ]);
-    });
-};
+      return knex('groups').insert([
+        { id: 1, name: 'Apa Sherpa', region_id: 'Auckland' },
+        { id: 2, name: 'Izzy Asper', region_id: 'Auckland' },
+        { id: 3, name: 'Khaled Shaya', region_id: 'Auckland' }
+      ])
+    })
+}

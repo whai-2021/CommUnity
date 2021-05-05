@@ -1,11 +1,10 @@
+exports.up = function (knex) {
+  return knex.schema.createTable('saved_posts', (table) => {
+    table.integer('user_id').primary()
+    table.integer('post_id').primary()
+  })
+}
 
-exports.up = function(knex) {
-    return knex.schema.createTable('Saved_Posts', (table) => {
-        table.integer('User_Id').primary()
-        table.integer('Post_Id').primary()
-    })
-};
-
-exports.down = function(knex) {
-    return knex.schema.dropTable('Saved_Posts')
-};
+exports.down = function (knex) {
+  return knex.schema.dropTable('saved_posts')
+}
