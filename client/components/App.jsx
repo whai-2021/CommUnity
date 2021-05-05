@@ -7,7 +7,6 @@ import Home from './Home'
 const App = () => {
   return (
     <div>
-      <img src='/images/Logo.png' />
       <Router>
         <Route path='/' component={Nav} />
         <Route exact path='/' component={Home} />
