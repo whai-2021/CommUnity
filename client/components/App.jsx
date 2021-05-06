@@ -9,6 +9,7 @@ import NewsFeed from './NewsFeed'
 import WhatsHappening from './WhatsHappening'
 import Information from './Information'
 import GetSupport from './GetSupport'
+import GroupPage from './GroupPage'
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
         <Route exact path='/whatshappening' component={WhatsHappening} />
         <Route exact path='/information' component={Information} />
         <Route exact path='/getsupport' component={GetSupport} />
+        <Route exact path='/whatshappening/:id' component={GroupPage} />
+
       </Router>
     </div>
   )
