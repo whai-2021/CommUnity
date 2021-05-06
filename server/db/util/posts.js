@@ -1,4 +1,4 @@
-const database = require('./connection')
+const database = require('../connection')
 
 const getPosts = (db = database) => {
   return db('posts').select()
