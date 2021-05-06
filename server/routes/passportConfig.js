@@ -4,7 +4,7 @@ const users = require('../db/util/users')
 
 function initialize (passport) {
   passport.use(new LocalStrategy(async (username, password, done) => {
-    const user = users.userExists(username)
+    const user = users.getUserbyUsername(username)
 
     if (!user) {
       return done(null, false, { message: 'Incorrect username.' })
