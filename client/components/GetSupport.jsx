@@ -1,8 +1,11 @@
 import React from 'react'
+import PageLinks from './PageLinks'
 
 function GetSupport () {
   return (
-    <h1>GetSupport</h1>
+    <>
+      <PageLinks/>
+    </>
   )
 }
 
