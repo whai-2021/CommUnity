@@ -8,6 +8,7 @@ const initialForm = {
 
 function SignIn (props) {
   const [form, setForm] = useState(initialForm)
+  const [error, setError] = useState('')
 
   function handleChange (evt) {
     evt.preventDefault()
@@ -22,8 +23,11 @@ function SignIn (props) {
     loginUser(form)
       .then((result) => {
         setForm(initialForm)
-        console.log(result)
-        // props.history.push('/')
+        if (result === 'Successfully Authenticated') {
+          props.history.push('/')
+        } else {
+          setError(result)
+        }
         return null
       })
       .catch(err =>
@@ -39,17 +43,18 @@ function SignIn (props) {
             Create an account
           </span>
         </p>
+        {error && <h3 className="text-center text-red-700">Error: {error}</h3>}
         <form onSubmit={handleSumbit}>
           <div className="flex justify-center">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label className="block uppercase tracking-wide text-blue-400 text-xs font-bold mb-2" htmlFor="username">username</label>
-              <input type="username" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='username' onChange={handleChange} />
+              <input type="username" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='username' onChange={handleChange} value={form.username} />
             </div>
           </div>
           <div className="flex justify-center mt-4">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label className="block uppercase tracking-wide text-blue-400 text-xs font-bold mb-2" htmlFor="password">Password</label>
-              <input type="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='password_hash' onChange={handleChange} />
+              <input type="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='password_hash' onChange={handleChange} value={form.password_hash} />
             </div>
           </div>
           <div className="mt-4 flex justify-center">

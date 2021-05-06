@@ -15,9 +15,6 @@ export function loginUser (user) {
 export function registerUser (user) {
   return request
     .post(rootUrl + '/register')
-    .send({
-      username: user.username,
-      password: user.password_hash
-    })
+    .send(user)
     .then(res => res.body)
 }

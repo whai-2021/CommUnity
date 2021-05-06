@@ -7,14 +7,14 @@ function initialize (passport) {
   passport.use(new LocalStrategy((username, password, done) => {
     users.getUserByUsername(username)
       .then(user => {
-        if (!user) return done(null, false)
+        if (!user) return done(null, false, { message: 'Invalid Username' })
 
         bcrypt.compare(password, user.password_hash, (err, result) => {
           if (err) throw err
           if (result === true) {
             return done(null, user)
           } else {
-            return (done, null, false)
+            return done(null, false, { message: 'Invalid Password' })
           }
         })
         return null

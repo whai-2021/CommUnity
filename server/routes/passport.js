@@ -27,10 +27,9 @@ router.get('/user', (req, res) => {
 })
 
 router.post('/login', async (req, res, next) => {
-  console.log('post route hit')
   await passport.authenticate('local', (err, user, info) => {
     if (err) throw err
-    if (!user) res.json('No User Exists')
+    if (!user) res.json(info.message)
     else {
       req.logIn(user, err => {
         if (err) throw err
@@ -39,6 +38,8 @@ router.post('/login', async (req, res, next) => {
     }
   })(req, res, next)
 })
+
+// need to make a log out route
 
 router.post('/register', (req, res) => {
   const { user } = req.body
