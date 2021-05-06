@@ -42,15 +42,14 @@ router.post('/login', async (req, res, next) => {
 // need to make a log out route
 
 router.post('/register', (req, res) => {
-  const { user } = req.body
-
-  users.userExists(user.username)
+  const newUser = req.body
+  users.userExists(newUser.username)
     .then(user => {
       if (!user) {
         // eslint-disable-next-line promise/no-nesting
-        users.createUser(user)
+        users.addUser(newUser)
           .then(() => {
-            res.json('user created')
+            res.json('User Created')
             return null
           })
           .catch(err => {
