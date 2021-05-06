@@ -6,7 +6,7 @@ function Nav () {
     <>
       <header className='flex flex-wrap items-center justify-between p-5'>
         <div className='flex justify-between'>
-          <img className='resize rounded-md' width='120' src='/images/Logo.png' />
+          <NavLink to='/'><img className='resize rounded-md' width='120' src='/images/Logo.png' /></NavLink>
         </div>
         <div className='flex ml-24 text-right justify-end w-auto px-4 py-2'>
           <NavLink to='login' className='ml-3 text-3xl'>Login </NavLink>
