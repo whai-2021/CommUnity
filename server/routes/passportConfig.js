@@ -2,7 +2,6 @@ const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const users = require('../db/untils/users')
 
-// link db functions
 export default function initialize (passport) {
   passport.use(new LocalStrategy(async (username, password, done) => {
     const user = users.userExists(username)
