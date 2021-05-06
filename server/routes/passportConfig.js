@@ -1,23 +1,28 @@
+/* eslint-disable promise/no-callback-in-promise */
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const users = require('../db/util/users')
 
 function initialize (passport) {
-  passport.use(new LocalStrategy(async (username, password, done) => {
-    const user = users.getUserbyUsername(username)
+  passport.use(new LocalStrategy((username, password, done) => {
+    users.getUserByUsername(username)
+      .then(user => {
+        if (!user) return done(null, false)
 
-    if (!user) {
-      return done(null, false, { message: 'Incorrect username.' })
-    }
-    try {
-      if (await bcrypt.compare(password, user.password)) {
-        return done(null, user)
-      } else {
-        return done(null, false, { message: 'Incorrect password.' })
-      }
-    } catch (error) {
-      return done(error)
-    }
+        bcrypt.compare(password, user.password_hash, (err, result) => {
+          if (err) throw err
+          if (result === true) {
+            return done(null, user)
+          } else {
+            return (done, null, false)
+          }
+        })
+        return null
+      })
+      .catch(err => {
+        console.log(err.message)
+        return null
+      })
   }))
   passport.serializeUser((user, done) => done(null, user.id))
   passport.deserializeUser((id, done) => {
