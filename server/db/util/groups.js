@@ -1,4 +1,4 @@
-const database = require('./connection')
+const database = require('../connection')
 
 const getGroups = (db = database) => {
   return db('groups').select()
