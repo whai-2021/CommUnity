@@ -48,9 +48,9 @@ router.get('/', (req, res) => {
 // POST create post
 router.post('/', (req, res) => {
   const { userId, groupId, body, createdAt } = req.body
-  db.addPost(userId, groupId, body, createdAt)
+  db.addPost({userId, groupId, body, createdAt})
     .then(posts => {
-      res.join(posts)
+      res.json(posts)
     })
     .catch(e => {
       res.status(500).send(e.message)
@@ -58,9 +58,9 @@ router.post('/', (req, res) => {
 })
 
 // DELETE post
-router.delete('./userId', (req, res) => {
-  const userId = req.params.id
-  db.deletePost(userId)
+router.delete('/:postId', (req, res) => {
+  const postId = req.params.postId
+  db.deletePost(postId)
     .then(() => {
       res.sendStatus(200)
   })
