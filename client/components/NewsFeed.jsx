@@ -1,8 +1,11 @@
 import React from 'react'
+import PageLinks from './PageLinks'
 
 function NewsFeed () {
   return (
-    <h1>NewsFeed</h1>
+    <>
+      <PageLinks/>
+    </>
   )
 }
 
