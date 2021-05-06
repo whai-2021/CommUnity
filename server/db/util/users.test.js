@@ -17,3 +17,16 @@ test('can get all users', () => {
     })
     .catch(err => expect(err).toBeNull())
 })
+
+// deleteUser
+test('can delete a user', () => {
+  const expected = 0
+  const id = 2
+  return db.deleteUser(id, testDb)
+    .then(() => {
+      return db.getUserById(id, testDb)
+        .then(user => {
+          return expect().toBeFalsy
+        })
+    })
+})
