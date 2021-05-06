@@ -7,7 +7,7 @@ const db = require('../db/util/posts')
 // GET Posts for a group
 // GET posts in a group by tag
 router.get('/', (req, res) => {
-  const { id, groupId, tag} = req.query
+  const { id, groupId, tag } = req.query
 
   if (id) {
     db.getPost(id)

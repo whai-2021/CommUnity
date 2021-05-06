@@ -15,9 +15,24 @@ router.get('/', (req, res) => {
     })
 })
 
+// GET specific user
+router.get('/:userId', (req, res) => {
+  const userId = Number(req.params.id)
+
+  db.getUserById(userId)
+    .then(user => {
+      res.json(user)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
 // DELETE user
-router.delete('/userId', (req, res) => {
-  const userId = req.params.id
+router.delete('/:userId', (req, res) => {
+  const userId = Number(req.params.id)
+  console.log('line21', userId)
   db.deleteUser(userId)
     .then(() => {
       res.sendStatus(200)
