@@ -24,9 +24,11 @@ test('can delete a user', () => {
   const id = 2
   return db.deleteUser(id, testDb)
     .then(() => {
+      // eslint-disable-next-line promise/no-nesting
       return db.getUserById(id, testDb)
         .then(user => {
-          return expect().toBeFalsy
+          return expect(user).toBeFalsy
         })
     })
+    .catch(err => expect(err).toBeNull())
 })
