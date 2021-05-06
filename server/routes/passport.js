@@ -35,13 +35,11 @@ router.post('/login', (req, res, next) => {
       req.logIn(user, err => {
         if (err) throw err
         res.json('Successfully Authenticated')
-        // console.log(req.user)
       })
     }
   })(req, res, next)
 })
 
-// link db functions
 router.post('/register', (req, res) => {
   const { firstName, lastName, username, password } = req.body
 
