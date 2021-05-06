@@ -8,7 +8,6 @@ function initialize (passport) {
     users.getUserByUsername(username)
       .then(user => {
         if (!user) return done(null, false, { message: 'Invalid Username' })
-
         bcrypt.compare(password, user.password_hash, (err, result) => {
           if (err) throw err
           if (result === true) {

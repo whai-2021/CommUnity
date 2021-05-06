@@ -27,11 +27,16 @@ const getUserByUsername = (username, db = database) => {
 }
 
 const addUser = (user, db = database) => {
-  const hashedPassword = bcrypt.hash(user.password_hash, saltRounds)
-  user.password_hash = hashedPassword
-  return db('users')
-    .insert(user)
-    .then((id) => getUserById(id[0]))
+  bcrypt.hash(user.password_hash, saltRounds)
+    .then(result => {
+      user.password_hash = result
+      // eslint-disable-next-line promise/no-nesting
+      return db('users')
+        .insert(user)
+        .then((id) => getUserById(id[0]))
+    })
+    .catch(err =>
+      console.log(err.message))
 }
 
 // update user

@@ -29,6 +29,7 @@ function Register (props) {
         setForm(initialForm)
         if (result === 'User Created') {
           props.history.push('/')
+          // need to save user to redux state
         } else {
           setError(result)
         }
