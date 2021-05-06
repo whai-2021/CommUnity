@@ -9,7 +9,7 @@ function Nav () {
           <NavLink to='/'><img className='resize rounded-md' width='120' src='/images/Logo.png' /></NavLink>
         </div>
         <div className='flex ml-24 text-right justify-end w-auto px-4 py-2'>
-          <NavLink to='login' className='ml-3 text-3xl'>Login </NavLink>
+          <NavLink to='signIn' className='ml-3 text-3xl'>Login</NavLink>
           <NavLink to='register' className='ml-3 text-3xl'>Register</NavLink>
         </div>
       </header>
