@@ -24,6 +24,7 @@ function SignIn (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'Successfully Authenticated') {
+          // need to save user to redux state
           props.history.push('/')
         } else {
           setError(result)

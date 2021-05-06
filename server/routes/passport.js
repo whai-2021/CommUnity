@@ -12,7 +12,7 @@ require('./passportConfig')(passport)
 const users = require('../db/util/users')
 
 router.use(flash())
-// might need to use true for resave and saveUnitialized
+
 router.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,

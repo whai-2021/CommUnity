@@ -1,4 +1,6 @@
 const database = require('../connection')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 const getUsers = (db = database) => {
   return db('users').select()
@@ -25,7 +27,10 @@ const getUserByUsername = (username, db = database) => {
 }
 
 const addUser = (user, db = database) => {
-  return db('users').insert(user)
+  const hashedPassword = bcrypt.hash(user.password_hash, saltRounds)
+  user.password_hash = hashedPassword
+  return db('users')
+    .insert(user)
     .then((id) => getUserById(id[0]))
 }
 
