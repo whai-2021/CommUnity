@@ -35,6 +35,7 @@ const deleteUser = (id, db = database) => {
   return db('users').where('id', id).delete()
 }
 
+
 module.exports = {
   getUsers,
   userExists,

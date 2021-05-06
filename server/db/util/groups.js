@@ -15,8 +15,8 @@ const getGroupByName = (name, db = database) => {
     .first()
 }
 
-const addGroup = (group, db = database) => {
-  return db('groups').insert(group)
+const addGroup = ({name, regionId}, db = database) => {
+  return db('groups').insert({name, region_id:regionId})
     .then((id) => getGroupById(id[0]))
 }
 
@@ -36,15 +36,13 @@ const getUsersGroups = (userId, db = database) => {
 
 const addMemberToGroup = (userId, groupId, db = database) => {
   return db('group_members').insert({ group_id: groupId, user_id: userId })
-    .then((id) => {
-      console.log("Caleb didn't know what this will return")
-      console.log('That being said heres the value of id ' + id)
-      return getGroupMembers(id)
+    .then((groupId) => {
+      return getGroupMembers(groupId)
     })
 }
 
 const removeMemberFromGroup = (userId, groupId, db = database) => {
-  return db('group_members').where('user_id', userId).andWhere('group_id', groupId).delete()
+  return db('group_members').where('user_id', userId).where('group_id', groupId).delete()
 }
 
 // update group
