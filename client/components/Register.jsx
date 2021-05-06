@@ -39,7 +39,7 @@ function Register (props) {
         console.log(err.message))
   }
   return (
-    <div className="signIn-page mt-5">
+    <div className="signIn-page mb-12">
       <div>
         <h2 className="text-center text-3xl leading-9 font-extrabold">Create Your Account</h2>
         {error && <h3 className="text-center text-red-700">Error: {error}</h3>}
