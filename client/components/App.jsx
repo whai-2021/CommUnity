@@ -10,6 +10,7 @@ import WhatsHappening from './WhatsHappening'
 import Information from './Information'
 import GetSupport from './GetSupport'
 import GroupPage from './GroupPage'
+import PageLinks from './PageLinks'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route exact path='/information' component={Information} />
         <Route exact path='/getsupport' component={GetSupport} />
         <Route exact path='/whatshappening/:id' component={GroupPage} />
+        <Route exact path='/pagelinks' component={PageLinks} />
 
       </Router>
     </div>
