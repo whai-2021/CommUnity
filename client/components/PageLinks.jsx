@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 // component to be imported into every component that needs it
