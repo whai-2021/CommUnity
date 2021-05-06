@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 // GET specific user
 router.get('/:userId', (req, res) => {
-  const userId = Number(req.params.id)
+  const userId = Number(req.params.userId)
 
   db.getUserById(userId)
     .then(user => {
@@ -31,8 +31,7 @@ router.get('/:userId', (req, res) => {
 
 // DELETE user
 router.delete('/:userId', (req, res) => {
-  const userId = Number(req.params.id)
-  console.log('line21', userId)
+  const userId = Number(req.params.userId)
   db.deleteUser(userId)
     .then(() => {
       res.sendStatus(200)

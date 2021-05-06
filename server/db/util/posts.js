@@ -28,7 +28,7 @@ const addPost = ({userId, groupId, body, createdAt}, db = database) => {
 // update post
 
 const deletePost = (id, db = database) => {
-  return db('users').where('id', id).delete()
+  return db('posts').where('id', id).delete()
 }
 
 module.exports = {
