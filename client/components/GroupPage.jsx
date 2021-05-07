@@ -1,8 +1,9 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import { getGroupById } from '../apis/groups'
 
+// get redux information by console.logging props.user, props.region and props.userGroups
 function GroupPage () {
   const [group, setGroup] = useState([])
 
@@ -57,4 +58,12 @@ function GroupPage () {
   )
 }
 
-export default GroupPage
+function mapStateToProps (state) {
+  return {
+    region: state.region,
+    user: state.user,
+    userGroups: state.userGroups
+  }
+}
+
+export default connect(mapStateToProps)(GroupPage)

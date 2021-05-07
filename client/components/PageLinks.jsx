@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-// component to be imported into every component that needs it
+// NavLinks mess up css. Fix later
 function PageLinks () {
   return (
     <div className="container mx-auto sm">

@@ -16,7 +16,7 @@ const getGroupByName = (name, db = database) => {
 }
 
 const addGroup = ({name, regionId}, db = database) => {
-  return db('groups').insert({name, region_id:regionId})
+  return db('groups').insert({name, region_id: regionId})
     .then((id) => getGroupById(id[0]))
 }
 
