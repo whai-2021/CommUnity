@@ -8,7 +8,16 @@ function MyAccount () {
       </div>
       <div className="flex items-center justify-center flex-col col-span-2">
         <div className="container flex items-center">
-          <p className="text-2xl mr-4 mt-5">Apa Sherpa</p>
+          <p className="text-xl mr-4 mt-5">First Name: Apa</p>
+        </div>
+        <div className="container flex items-center">
+          <p className="text-xl mr-4 mt-5">Last Name: Sherpa</p>
+        </div>
+        <div className="container flex items-center">
+          <p className="text-xl mr-4 mt-5">Email: apa.sherpa@gmail.com</p>
+        </div>
+        <div className="container flex items-center">
+          <p className="text-xl mr-4 mt-5">Password: Sherpa01 </p>
         </div>
       </div>
     </div>
