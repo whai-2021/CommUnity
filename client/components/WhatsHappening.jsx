@@ -1,7 +1,9 @@
 import React from 'react'
 import PageLinks from './PageLinks'
+import { connect } from 'react-redux'
 
-function WhatsHappening () {
+// get redux information by console.logging props.user, props.region and props.userGroups
+function WhatsHappening (props) {
   return (
     <>
       <PageLinks />
@@ -9,4 +11,12 @@ function WhatsHappening () {
   )
 }
 
-export default WhatsHappening
+function mapStateToProps (state) {
+  return {
+    region: state.region,
+    user: state.user,
+    userGroups: state.userGroups
+  }
+}
+
+export default connect(mapStateToProps)(WhatsHappening)
