@@ -21,11 +21,37 @@ function GroupPage () {
 
   return (
     <>
-      <h1>GroupPage</h1>
       <div>
-        {group.map(({ name }) =>
-          <h2>{ name }</h2>
-        )}
+        <h2 className='flex py-2 text-5xl container mx-auto'>{ group.name }</h2>
+        <div className='grid grid-cols3 gap-4'>
+          <div className='col-span-3 box-border h-32 w-132 p-4 border-4'>Join/Leave</div>
+          <div>
+            <ul>
+              <li>
+                <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>All</button>
+              </li>
+              <li>
+                <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Shopping</button>
+              </li>
+              <li>
+                <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Events</button>
+              </li>
+              <li>
+                <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Location</button>
+              </li>
+              <li>
+                <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Job Listing</button>
+              </li>
+              <li>
+                <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Custom</button>
+              </li>
+            </ul>
+          </div>
+          <div>Feed</div>
+          <div>
+            <h1 className='text-center'>Members</h1>
+          </div>
+        </div>
       </div>
     </>
   )
