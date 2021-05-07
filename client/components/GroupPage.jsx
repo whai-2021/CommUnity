@@ -21,14 +21,12 @@ function GroupPage () {
 
   return (
     <>
-    <h1>GroupPage</h1>
-    <div>
-      {group.map(({name, region_id}) =>
+      <h1>GroupPage</h1>
       <div>
-      <h2>{name}</h2>
-      <h3>{region_id}</h3>
-      </div>)}
-    </div>
+        {group.map(({ name }) =>
+          <h2>{ name }</h2>
+        )}
+      </div>
     </>
   )
 }
