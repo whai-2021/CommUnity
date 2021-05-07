@@ -5,6 +5,7 @@ import Nav from './Nav'
 import Home from './Home'
 import SignIn from './SignIn'
 import Register from './Register'
+import MyAccount from './MyAccount'
 import NewsFeed from './NewsFeed'
 import WhatsHappening from './WhatsHappening'
 import Information from './Information'
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path='/' component={Home} />
         <Route exact path='/signIn' component={SignIn} />
         <Route exact path='/register' component={Register} />
+        <Route exact path='/myAccount' component={MyAccount} />
         <Route exact path='/newsfeed' component={NewsFeed} />
         <Route exact path='/whatshappening' component={WhatsHappening} />
         <Route exact path='/information' component={Information} />
