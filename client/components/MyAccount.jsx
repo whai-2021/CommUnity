@@ -11,7 +11,7 @@ function MyAccount () {
           <div className='bg-gray-200 text-gray-700 text-lg px-6 py-4'>MY ACCOUNT</div>
 
           <div className='flex justify-between px-6 py-4'>
-            <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Groups</button>
+            <NavLink to='/whatshappening'><button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Groups</button></NavLink>
             <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Saved Posts</button>
           </div>
 
@@ -20,7 +20,7 @@ function MyAccount () {
           </div>
 
           <div className='bg-gray-200 px-6 py-4'>
-            <NavLink to='/whatshappening'><button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Edit Info</button></NavLink>
+            <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Edit Info</button>
 
             <div className='flex items-center pt-3'>
               <div className='font-bold bg-blue-300 flex justify-center items-center rounded-full w-12 h-12'>AS</div>
