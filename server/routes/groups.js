@@ -4,13 +4,14 @@ const router = express.Router()
 const db = require('../db/util/groups')
 
 // GET all groups and get User groups
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
   const userId = Number(req.query.userId)
 
   if (userId) {
     db.getUsersGroups(userId)
       .then((groups) => {
         res.json(groups)
+        return null
       })
       .catch(err => {
         console.log(err.message)
@@ -20,6 +21,7 @@ router.get('/', (req,res) => {
     db.getGroups()
       .then(groups => {
         res.json(groups)
+        return null
       })
       .catch(err => {
         res.sendStatus(500)
@@ -28,14 +30,14 @@ router.get('/', (req,res) => {
   }
 })
 
-
 // GET specific group
-router.get('/:groupId', (req,res) => {
+router.get('/:groupId', (req, res) => {
   const groupId = Number(req.params.groupId)
 
   db.getGroupById(groupId)
     .then(group => {
       res.json(group)
+      return null
     })
     .catch(err => {
       res.sendStatus(500)
@@ -44,12 +46,13 @@ router.get('/:groupId', (req,res) => {
 })
 
 // POST group
-router.post('/', (req,res) => {
+router.post('/', (req, res) => {
   const { name, regionId } = req.body
 
-  db.addGroup({name, regionId})
+  db.addGroup({ name, regionId })
     .then((group) => {
       res.json(group)
+      return null
     })
     .catch(err => {
       res.sendStatus(500)
@@ -71,17 +74,20 @@ router.delete('/:groupId', (req, res) => {
           )
           Promise.all(promises)
             .then(() => {
-                res.sendStatus(200)
-              })
-              .catch(err => {
-                res.sendStatus(500)
-                console.log(err.message)
-              })
+              res.sendStatus(200)
+              return null
+            })
+            .catch(err => {
+              res.sendStatus(500)
+              console.log(err.message)
+            })
+          return null
         })
         .catch(err => {
           res.sendStatus(500)
           console.log(err.message)
         })
+      return null
     })
     .catch(err => {
       res.sendStatus(500)
@@ -90,13 +96,14 @@ router.delete('/:groupId', (req, res) => {
 })
 
 // PUT add a user to a group
-router.put('/:groupId/members', (req,res) => {
+router.put('/:groupId/members', (req, res) => {
   const groupId = Number(req.params.groupId)
-  const {userId} = req.body
+  const { userId } = req.body
 
   db.addMemberToGroup(userId, groupId)
     .then((group) => {
       res.json(group)
+      return null
     })
     .catch(err => {
       res.sendStatus(500)
@@ -105,12 +112,13 @@ router.put('/:groupId/members', (req,res) => {
 })
 
 // GET members of a group
-router.get('/:groupId/members', (req,res) => {
+router.get('/:groupId/members', (req, res) => {
   const groupId = Number(req.params.groupId)
 
   db.getGroupMembers(groupId)
     .then((members) => {
       res.json(members)
+      return null
     })
     .catch(err => {
       console.log(err.message)
@@ -118,21 +126,37 @@ router.get('/:groupId/members', (req,res) => {
     })
 })
 
-//DELETE user from a group
+// DELETE user from a group
 router.delete('/:id/members', (req, res) => {
   const id = Number(req.params.id)
-  const {userId} = req.body
+  const { userId } = req.body
 
   db.removeMemberFromGroup(userId, id)
     .then(() => {
       db.getGroupMembers(id)
         .then(members => {
           res.json(members)
+          return null
         })
         .catch(err => {
           console.log(err.message)
           res.sendStatus(500)
         })
+      return null
+    })
+    .catch(err => {
+      console.log(err.message)
+      res.sendStatus(500)
+    })
+})
+
+router.get('/:groupId/tags', (req, res) => {
+  const id = Number(req.params.groupId)
+
+  db.getGroupsTags(id)
+    .then(tags => {
+      res.json(tags)
+      return null
     })
     .catch(err => {
       console.log(err.message)

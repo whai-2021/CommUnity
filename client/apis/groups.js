@@ -19,3 +19,15 @@ export function getGroupById (groupId) {
     .get(rootUrl + '/' + groupId)
     .then(res => res.body)
 }
+
+export function getGroupMembers (groupId) {
+  return request
+    .get(rootUrl + '/' + groupId + '/members')
+    .then(res => res.body)
+}
+
+export function getGroupsTags (groupId) {
+  return request
+    .get(rootUrl + '/' + groupId + '/tags')
+    .then(res => res.body)
+}

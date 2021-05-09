@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
     db.getPost(id)
       .then(post => {
         res.json(post)
+        return null
       })
       .catch(e => {
         res.status(500).send(e.message)
@@ -21,6 +22,7 @@ router.get('/', (req, res) => {
     db.getPostsByGroup(groupId)
       .then(posts => {
         res.json(posts)
+        return null
       })
       .catch(e => {
         res.status(500).send(e.message)
@@ -29,6 +31,7 @@ router.get('/', (req, res) => {
     db.getGroupPostsByTag(tag)
       .then(posts => {
         res.json(posts)
+        return null
       })
       .catch(e => {
         res.status(500).send(e.message)
@@ -48,9 +51,10 @@ router.get('/', (req, res) => {
 // POST create post
 router.post('/', (req, res) => {
   const { userId, groupId, body, createdAt } = req.body
-  db.addPost({userId, groupId, body, createdAt})
+  db.addPost({ userId, groupId, body, createdAt })
     .then(posts => {
       res.json(posts)
+      return null
     })
     .catch(e => {
       res.status(500).send(e.message)
@@ -63,10 +67,24 @@ router.delete('/:postId', (req, res) => {
   db.deletePost(postId)
     .then(() => {
       res.sendStatus(200)
-  })
+      return null
+    })
     .catch(e => {
       res.status(500).send(e.message)
+    })
 })
+
+// GET a posts tags
+router.get('/:postId/tags', (req, res) => {
+  const postId = Number(req.params.postId)
+  db.getPostTags(postId)
+    .then((tags) => {
+      res.json(tags)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
 })
 
 module.exports = router

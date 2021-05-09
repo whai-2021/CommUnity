@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { registerUser } from '../apis/passportapi'
+import { registerUser } from '../../apis/passportapi'
 
 // might have to change to camelCase
 const initialForm = {

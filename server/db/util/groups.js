@@ -15,8 +15,8 @@ const getGroupByName = (name, db = database) => {
     .first()
 }
 
-const addGroup = ({name, regionId}, db = database) => {
-  return db('groups').insert({name, region_id: regionId})
+const addGroup = ({ name, regionId }, db = database) => {
+  return db('groups').insert({ name, region_id: regionId })
     .then((id) => getGroupById(id[0]))
 }
 
@@ -53,6 +53,13 @@ const deleteGroup = (id, db = database) => {
   return db('groups').where('id', id).delete()
 }
 
+const getGroupsTags = (groupId, db = database) => {
+  return db('posts')
+    .join('tags', 'tags.post_id', 'posts.id')
+    .select()
+    .where('group_id', groupId)
+}
+
 module.exports = {
   getGroups,
   addGroup,
@@ -62,5 +69,6 @@ module.exports = {
   addMemberToGroup,
   getGroupMembers,
   removeMemberFromGroup,
-  getUsersGroups
+  getUsersGroups,
+  getGroupsTags
 }

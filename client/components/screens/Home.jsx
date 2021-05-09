@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setRegion } from '../actions/region'
-
+import { setRegion } from '../../actions/region'
+import { NavLink } from 'react-router-dom'
 
 function Home (props) {
   function handleClick (evt) {

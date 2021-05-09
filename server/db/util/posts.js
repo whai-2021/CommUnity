@@ -5,7 +5,16 @@ const getPosts = (db = database) => {
 }
 
 const getPostsByGroup = (groupId, db = database) => {
-  return db('posts').select().where('group_id', groupId)
+  return db('posts')
+    .join('users', 'users.id', 'posts.author_id')
+    .select()
+    .where('group_id', groupId)
+}
+
+const getPostTags = (postId, db = database) => {
+  return db('tags')
+    .select()
+    .where('post_id', postId)
 }
 
 const getGroupPostsByTag = (tag, groupId, db = database) => {
@@ -20,8 +29,8 @@ const getPost = (id, db = database) => {
   return db('posts').where('id', id).select().first()
 }
 
-const addPost = ({userId, groupId, body, createdAt}, db = database) => {
-  return db('posts').insert({author_id:userId, group_id:groupId,body, created_at:createdAt})
+const addPost = ({ userId, groupId, body, createdAt }, db = database) => {
+  return db('posts').insert({ author_id: userId, group_id: groupId, body, created_at: createdAt })
     .then((id) => getPost(id[0]))
 }
 
@@ -37,5 +46,6 @@ module.exports = {
   addPost,
   deletePost,
   getPostsByGroup,
-  getGroupPostsByTag
+  getGroupPostsByTag,
+  getPostTags
 }
