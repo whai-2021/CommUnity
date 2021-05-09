@@ -35,7 +35,7 @@ function SignIn (props) {
         console.log('user not sent for registration' + err.message))
   }
   return (
-    <div className="signIn-page mt-5 flex flex-col">
+    <div className="signIn-page mt-24 flex flex-col">
       <div>
         <h2 className="text-center text-3xl leading-9 font-extrabold">Sign In to your account</h2>
         <p className="text-center text-sm leading-5">
