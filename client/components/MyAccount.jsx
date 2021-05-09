@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 import Footer from './Footer'
 
@@ -19,7 +20,7 @@ function MyAccount () {
           </div>
 
           <div className='bg-gray-200 px-6 py-4'>
-            <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Edit Info</button>
+            <NavLink to='/whatshappening'><button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Edit Info</button></NavLink>
 
             <div className='flex items-center pt-3'>
               <div className='font-bold bg-blue-300 flex justify-center items-center rounded-full w-12 h-12'>AS</div>
