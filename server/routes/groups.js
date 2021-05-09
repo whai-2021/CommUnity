@@ -3,7 +3,7 @@ const router = express.Router()
 
 const db = require('../db/util/groups')
 
-//GET all groups and get User groups
+// GET all groups and get User groups
 router.get('/', (req,res) => {
   const userId = Number(req.query.userId)
 
