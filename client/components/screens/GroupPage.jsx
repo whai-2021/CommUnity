@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { getGroupById, getGroupMembers, getGroupsTags } from '../../apis/groups'
 import { getPostsByGroup } from '../../apis/posts'
 import Post from '../Post'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
-function GroupPage () {
+function GroupPage (props) {
+  const groupId = props.match.params.id
   const [group, setGroup] = useState([])
   const [members, setMembers] = useState([])
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
 
   useEffect(() => {
-    getGroupById(1)
+    getGroupById(groupId)
       .then(group => {
         setGroup(group)
 
@@ -23,7 +25,7 @@ function GroupPage () {
         console.log(e.message)
       })
 
-      getGroupMembers(1)
+      getGroupMembers(groupId)
         .then((members) => {
           setMembers(members)
           return null
@@ -32,7 +34,7 @@ function GroupPage () {
           console.log(e.message)
       })
 
-      getPostsByGroup(1)
+      getPostsByGroup(groupId)
        .then((posts) => {
         setPosts(posts)
         return null
@@ -41,7 +43,7 @@ function GroupPage () {
         console.log(e.message)
       })
 
-      getGroupsTags(1)
+      getGroupsTags(groupId)
         .then(tags => {
           console.log(tags)
           setTags(tags)
@@ -58,9 +60,11 @@ function GroupPage () {
         <img className="w-full" src="./images/Mobile Friendly Banner.png" />
         <div className='px-8 py-4 flex sticky top-0 bg-white shadow-md justify-between items-center z-50'>
           <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-600 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <Link to='/whatshappening'>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-600 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </Link>
             <h2 className='text-4xl text-gray-700 font-semibold px-8'>{ group.name }</h2>
           </div>
           <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xl hover:text-white py-2 px-12 rounded'>Join Group</button>
