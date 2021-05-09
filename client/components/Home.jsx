@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { setRegion } from '../actions/region'
 
-function Home () {
-  const [form, setForm] = useState('')
-
+function Home (props) {
   function handleClick (evt) {
-    setForm(evt.target.value)
-    
+    evt.preventDefault()
+    const region = evt.target.options[evt.target.selectedIndex].value
+    props.dispatch(setRegion(region))
+    props.history.push('/whatshappening')
   }
 
   return (
@@ -23,4 +25,10 @@ function Home () {
   )
 }
 
-export default Home
+function mapStateToProps (state) {
+  return {
+    region: state.region
+  }
+}
+
+export default connect(mapStateToProps)(Home)

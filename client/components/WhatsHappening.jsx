@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
 function WhatsHappening (props) {
+  console.log(props)
   return (
     <>
       <PageLinks />
