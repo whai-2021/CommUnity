@@ -1,9 +1,9 @@
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('group_members').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
+      return knex('group_members').insert([
         { group_id: 1, user_id: 2 },
         { group_id: 1, user_id: 3 },
         { group_id: 1, user_id: 4 },
