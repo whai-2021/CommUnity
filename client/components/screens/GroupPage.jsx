@@ -25,17 +25,17 @@ function GroupPage (props) {
         console.log(e.message)
       })
 
-      getGroupMembers(groupId)
-        .then((members) => {
-          setMembers(members)
-          return null
-        })
-         .catch(e => {
-          console.log(e.message)
+    getGroupMembers(groupId)
+      .then((members) => {
+        setMembers(members)
+        return null
+      })
+      .catch(e => {
+        console.log(e.message)
       })
 
-      getPostsByGroup(groupId)
-       .then((posts) => {
+    getPostsByGroup(groupId)
+      .then((posts) => {
         setPosts(posts)
         return null
       })
@@ -43,15 +43,15 @@ function GroupPage (props) {
         console.log(e.message)
       })
 
-      getGroupsTags(groupId)
-        .then(tags => {
-          console.log(tags)
-          setTags(tags)
-          return null
-        })
-        .catch(e => {
-          console.log(e.message)
-        })
+    getGroupsTags(groupId)
+      .then(tags => {
+        console.log(tags)
+        setTags(tags)
+        return null
+      })
+      .catch(e => {
+        console.log(e.message)
+      })
   }, [])
 
   return (
@@ -89,7 +89,7 @@ function GroupPage (props) {
             <div className="bg-gray-50 p-4">
               {members.length > 0 && members.map((member) => <div key={member.id}>
                 <h6>{member.first_name} {member.last_name}</h6>
-              </div> )}
+              </div>)}
             </div>
           </div>
         </div>
