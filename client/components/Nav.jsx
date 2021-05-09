@@ -5,6 +5,9 @@ function Nav () {
   return (
     <>
       <header className='flex flex-wrap p-5'>
+        <div className='hero container max-w-screen-lg mx-auto pb-10 flex justify-center pl-52'>
+          <NavLink to='/'><img className='resize rounded-md' width='300' src='/images/Logo(invisible).png' /></NavLink>
+        </div>
         <div className='text-right object-right-top pr-4 py-2'>
           <NavLink to='/'><img className='tracking-wide' width='100' src='/images/OnlyLogo.png' /></NavLink>
           <NavLink to='/'><img className='tracking-wide' width='100' src='/images/CommUnity.png' /></NavLink>

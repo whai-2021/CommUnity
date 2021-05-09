@@ -4,9 +4,6 @@ import { HashRouter as Router, Link, NavLink } from 'react-router-dom'
 function Home () {
   return (
     <>
-      <div className='hero container max-w-screen-lg mx-auto pb-10 flex justify-center'>
-        <NavLink to='/'><img className='resize rounded-md' width='300' src='/images/Logo(invisible).png' /></NavLink>
-      </div>
       <div className='flex items-center justify-center py-40 -mt-28 text-7xl container mx-auto'><h1 className='pr-8'>I Live in ... </h1>
         <select className="border border-gray-300 rounded-full text-gray-600 text-4xl bg-white hover:border-gray-400 focus:outline-none appearance-none">
           <option>Choose your location</option>
