@@ -12,6 +12,12 @@ import Information from './Information'
 import GetSupport from './screens/GetSupport'
 import GroupPage from './screens/GroupPage'
 import PageLinks from './PageLinks'
+import Emergency from './inside information/Emergency'
+import EnglishSchools from './inside information/EnglishSchools'
+import Family from './inside information/Family'
+import Health from './inside information/Health'
+import Important from './inside information/Important'
+import Transport from './inside information/Transport'
 
 const App = () => {
   return (
@@ -28,6 +34,12 @@ const App = () => {
         <Route exact path='/getsupport' component={GetSupport} />
         <Route exact path='/whatshappening/:id' component={GroupPage} />
         <Route exact path='/pagelinks' component={PageLinks} />
+        <Route exact path='/information/emergency' component={Emergency} />
+        <Route exact path='/information/english' component={EnglishSchools} />
+        <Route exact path='/information/family' component={Family} />
+        <Route exact path='/information/health' component={Health} />
+        <Route exact path='/information/important' component={Important} />
+        <Route exact path='/information/transport' component={Transport} />
 
       </Router>
     </div>
