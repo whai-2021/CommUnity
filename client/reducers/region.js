@@ -1,4 +1,4 @@
-function region (state = 1, action) {
+function region (state = { id: 1, name: 'Auckland' }, action) {
   switch (action.type) {
     case 'SET_REGION':
       return action.region

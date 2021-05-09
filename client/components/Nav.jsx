@@ -4,15 +4,14 @@ import { NavLink } from 'react-router-dom'
 function Nav () {
   return (
     <>
-      <header className='flex flex-wrap p-5'>
-        <div className='hero container max-w-screen-lg mx-auto pb-10 flex justify-center pl-52'>
-          <NavLink to='/'><img className='resize rounded-md' width='300' src='/images/Logo(invisible).png' /></NavLink>
-        </div>
-        <div className='text-right object-right-top pr-4 py-2'>
-          <NavLink to='/'><img className='tracking-wide' width='100' src='/images/OnlyLogo.png' /></NavLink>
-          <NavLink to='/'><img className='tracking-wide' width='100' src='/images/CommUnity.png' /></NavLink>
-          <NavLink to='signIn' className='ml-2 text-2xl uppercase tracking-wide text-blue-400 font-bold mb-2'>Login</NavLink>
-          <NavLink to='register' className='ml-7 text-2xl uppercase tracking-wide text-blue-400 font-bold mb-2'>Register</NavLink>
+      <header className='bg-white font-sans flex flex-col items-center'>
+        <div className='w-full px-4 py-3'>
+          <div className='flex items-center justify-between'>
+            <NavLink to='/'><img className='r' width='150' src='/images/Community.png' /></NavLink>
+            <NavLink to='signIn' className='tracking-wide pr-8'>Login</NavLink>
+            <NavLink to='register' className='tracking-wide'>Register</NavLink>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </div>
         </div>
       </header>
     </>

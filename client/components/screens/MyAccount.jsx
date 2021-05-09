@@ -1,16 +1,17 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 import Footer from '../Footer'
 
 function MyAccount () {
   return (
     <div>
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center mt-12'>
         <div className='w-2/3 flex flex-col shadow-lg rounded-lg overflow-hidden'>
           <div className='bg-gray-200 text-gray-700 text-lg px-6 py-4'>MY ACCOUNT</div>
 
           <div className='flex justify-between px-6 py-4'>
-            <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Groups</button>
+            <NavLink to='/whatshappening'><button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Groups</button></NavLink>
             <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Saved Posts</button>
           </div>
 
