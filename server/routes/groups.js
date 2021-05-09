@@ -128,11 +128,27 @@ router.delete('/:id/members', (req, res) => {
       db.getGroupMembers(id)
         .then(members => {
           res.json(members)
+          return null
         })
         .catch(err => {
           console.log(err.message)
           res.sendStatus(500)
         })
+      return null
+    })
+    .catch(err => {
+      console.log(err.message)
+      res.sendStatus(500)
+    })
+})
+
+router.get('/:groupId/tags', (req, res) => {
+  const id = Number(req.params.groupId)
+
+  db.getGroupsTags(id)
+    .then(tags => {
+      res.json(tags)
+      return null
     })
     .catch(err => {
       console.log(err.message)

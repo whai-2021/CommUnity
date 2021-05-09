@@ -66,7 +66,20 @@ router.delete('/:postId', (req, res) => {
   })
     .catch(e => {
       res.status(500).send(e.message)
+  })
 })
+
+// GET a posts tags
+router.get('/:postId/tags', (req, res) => {
+  const postId = Number(req.params.postId)
+  db.getPostTags(postId)
+    .then((tags) => {
+      res.json(tags)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
 })
 
 module.exports = router
