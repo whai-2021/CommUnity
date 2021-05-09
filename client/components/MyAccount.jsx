@@ -1,29 +1,33 @@
 import React from 'react'
 
-import Header from './Header'
-
 function MyAccount () {
   return (
-    <div>
-      <Header />
-      <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
-        <div className="container flex justify-center">
-          <img className="rounded-full h-40 w-40 flex" src="/images/logo.png" alt="user profile photo" />
+    <div className='flex justify-center items-center'>
+      <div className='w-2/3 flex flex-col shadow-lg rounded-lg overflow-hidden'>
+        <div className='bg-gray-200 text-gray-700 text-lg px-6 py-4'>MY ACCOUNT</div>
+
+        <div className='flex justify-between px-6 py-4'>
+          <button className='bg-blue-400 px-2 py-1 rounded-full'>Groups</button>
+          <button className='bg-blue-400 px-2 py-1 rounded-full'>Saved Posts</button>
         </div>
-        <div className="flex items-center justify-center flex-col col-span-2">
-          <div className="container flex items-center">
-            <p className="text-xl mr-4 mt-5">First Name: Apa</p>
+
+        <div>
+          <div>Something here..</div>
+        </div>
+
+        <div className='bg-gray-200'>
+          <div>Edit Info</div>
+
+          <div>
+            <div>AS</div>
+            <div>
+              <p>first name: Apa</p>
+              <p>last name: Sherpa</p>
+              <p>email: apa.sherpa@loop.com</p>
+              <p>password: Sherpa01</p>
+            </div>
           </div>
-          <div className="container flex items-center">
-            <p className="text-xl mr-4 mt-5">Last Name: Sherpa</p>
-          </div>
-          <div className="container flex items-center">
-            <p className="text-xl mr-4 mt-5">Email: apa.sherpa@gmail.com</p>
-          </div>
-          <div className="container flex items-center">
-            <p className="text-xl mr-4 mt-5">Password: Sherpa01 </p>
-          </div>
-          <button type="submit" className="bg-blue-400 font-bold text-sm rounded text-white w-20 h-8">edit info</button>
+
         </div>
       </div>
     </div>
