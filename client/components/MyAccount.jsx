@@ -11,7 +11,7 @@ function MyAccount () {
           <button className='bg-blue-400 px-2 py-1 rounded-full'>Saved Posts</button>
         </div>
 
-        <div>
+        <div className='px-6 py-4 border-t border-gray-200'>
           <div>Something here..</div>
         </div>
 
