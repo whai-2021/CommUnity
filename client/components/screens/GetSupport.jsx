@@ -1,5 +1,5 @@
 import React from 'react'
-import PageLinks from './PageLinks'
+import PageLinks from '../PageLinks'
 
 function GetSupport () {
   return (
