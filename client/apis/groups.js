@@ -31,3 +31,9 @@ export function getGroupsTags (groupId) {
     .get(rootUrl + '/' + groupId + '/tags')
     .then(res => res.body)
 }
+
+export function addGroup (name, regionId) {
+  return request
+    .post(rootUrl + '/')
+    .send({ name, regionId })
+}

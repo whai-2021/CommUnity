@@ -1,26 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import PageLinks from '../PageLinks'
 import { connect } from 'react-redux'
-import { getUsersGroups, getGroups } from '../../apis/groups'
+import { getUsersGroups, getGroups, addGroup } from '../../apis/groups'
 import { Link, NavLink } from 'react-router-dom'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
-function showForm () {
-  return (
-    <div>
-      <form>
-        <label>Group Name: </label>
-        <input type='text' className='bg-gray-200'></input>
-        <button className='rounded-full border-2 text-black bg-blue-400 focus:outline-none focus:border-blue-400'>Create</button>
-      </form>
-    </div>
-  )
-}
-
 function WhatsHappening (props) {
   const [usersGroups, setUsersGroups] = useState('')
   const [groups, setGroups] = useState([])
   const [formVisible, setFormVisible] = useState(false)
+
+  const initialFormData = { name: '' }
+  const [formData, setFormData] = useState(initialFormData)
+
+  function handleChange (e) {
+    e.preventDefault()
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+    console.log(formData)
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault()
+    addGroup(formata, 1)
+  }
+
+  function showForm () {
+    return (
+      <div>
+        <form>
+          <label>Group Name: </label>
+          <input name='name' type='text' value={formData.name} onChange={handleChange} className='bg-gray-200'></input>
+          <button className='rounded-full border-2 text-black bg-blue-400 focus:outline-none focus:border-blue-400' onClick={handleSubmit}>Create</button>
+        </form>
+      </div>
+    )
+  }
 
   useEffect(() => {
     getUsersGroups(1)
