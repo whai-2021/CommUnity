@@ -10,7 +10,7 @@ function WhatsHappening (props) {
   const [groups, setGroups] = useState([])
 
   useEffect(() => {
-    getUsersGroups(1)
+    getUsersGroups(props.user.id)
       .then((res) => {
         setUsersGroups(res)
         return null
