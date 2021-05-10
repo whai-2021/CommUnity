@@ -27,6 +27,7 @@ const App = () => {
     setIsOpen(!isOpen)
   }
 
+  // if you have a ton of exact routes think about using Switch from react-router-dom
   return (
     <div>
       <Router>

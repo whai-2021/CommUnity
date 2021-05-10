@@ -1,5 +1,6 @@
 import React from 'react'
 import PageLinks from './PageLinks'
+// run your linter, Router and Link aren't used
 import { HashRouter as Router, Link, NavLink } from 'react-router-dom'
 
 function Information () {

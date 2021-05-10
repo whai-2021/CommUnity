@@ -1,3 +1,4 @@
+// deleted commented out code, and write tests
 // const initialState = { id: 2, last_name: 'Guiang', first_name: 'Ysabel', username: 'ysabel', email: 'yg@yahoo.com' }
 const initialState = false
 function user (state = initialState, action) {
