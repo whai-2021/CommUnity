@@ -8,11 +8,8 @@ const Post = (props) => {
   const { getPosts } = props
   const { id, body, created_at: createdAt, first_name: firstName, last_name: lastName } = props.post
 
-  console.log(props.post)
-
   const delPost = () => {
     deletePost(id)
-    console.log(id)
     getPosts()
   }
 
