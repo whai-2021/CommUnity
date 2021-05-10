@@ -55,8 +55,9 @@ const deleteGroup = (id, db = database) => {
 
 const getGroupsTags = (groupId, db = database) => {
   return db('posts')
-    .join('tags', 'tags.post_id', 'posts.id')
-    .select()
+    .join('post_tags', 'post_tags.post_id', 'posts.id')
+    .join('tags', 'tags.id', 'post_tags.tag_id')
+    .select('tag', 'tag_id as id')
     .where('group_id', groupId)
 }
 

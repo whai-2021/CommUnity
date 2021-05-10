@@ -16,7 +16,7 @@ export function getPostTags (postId) {
 export function createPost (post, tags) {
   return request
     .post(rootUrl)
-    .send(post)
+    .send({ post, tags })
     .then(res => res.body)
 }
 

@@ -35,6 +35,7 @@ router.delete('/:userId', (req, res) => {
   db.deleteUser(userId)
     .then(() => {
       res.sendStatus(200)
+      return null
     })
     .catch(e => {
       res.status(500).send(e.message)

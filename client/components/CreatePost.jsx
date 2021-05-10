@@ -11,7 +11,7 @@ const CreatePost = (props) => {
   const { changeCreatePost, groupId, getPosts } = props
 
   const handleSubmit = () => {
-    createPost(post)
+    createPost(post, tags)
     getPosts()
     changeCreatePost()
   }
