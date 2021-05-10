@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PageLinks from '../PageLinks'
 import { connect } from 'react-redux'
 import { getUsersGroups, getGroups, addGroup } from '../../apis/groups'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
 function WhatsHappening (props) {
@@ -24,7 +24,7 @@ function WhatsHappening (props) {
 
   function handleSubmit (e) {
     e.preventDefault()
-    addGroup(formata, 1)
+    addGroup(formData, 1)
   }
 
   function showForm () {
