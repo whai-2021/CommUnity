@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../db/util/posts')
+const tagsDb = require('../db/util/tags')
 
 // GET all posts
 // GET Posts for a group
@@ -50,14 +51,14 @@ router.get('/', (req, res) => {
 
 // POST create post
 router.post('/', (req, res) => {
-  const { userId, groupId, body, createdAt } = req.body
-  db.addPost({ userId, groupId, body, createdAt })
-    .then(posts => {
-      res.json(posts)
+  const { post, tags } = req.body
+  db.addPost(post, tags)
+    .then(() => {
+      res.sendStatus(200)
       return null
     })
     .catch(e => {
-      res.status(500).send(e.message)
+      console.log(e.message)
     })
 })
 
@@ -77,7 +78,7 @@ router.delete('/:postId', (req, res) => {
 // GET a posts tags
 router.get('/:postId/tags', (req, res) => {
   const postId = Number(req.params.postId)
-  db.getPostTags(postId)
+  tagsDb.getPostTags(postId)
     .then((tags) => {
       res.json(tags)
       return null

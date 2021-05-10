@@ -44,12 +44,21 @@ router.post('/login', async (req, res, next) => {
 router.post('/register', (req, res) => {
   const newUser = req.body
   users.userExists(newUser.username)
-    .then(user => {
-      if (!user) {
+    .then(result => {
+      if (result === false) {
         // eslint-disable-next-line promise/no-nesting
         users.addUser(newUser)
-          .then(() => {
-            res.json('User Created')
+          .then(user => {
+            const userDetails = {
+              id: user.id,
+              username: user.username,
+              first_name: user.first_name,
+              last_name: user.last_name
+            }
+            req.logIn(userDetails, err => {
+              if (err) throw err
+              res.json('User Created')
+            })
             return null
           })
           .catch(err => {

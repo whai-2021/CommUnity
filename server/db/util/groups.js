@@ -23,7 +23,7 @@ const addGroup = ({ name, regionId }, db = database) => {
 const getGroupMembers = (groupId, db = database) => {
   return db('group_members')
     .join('users', 'users.id', 'group_members.user_id')
-    .select()
+    .select('first_name', 'last_name', 'users.id')
     .where('group_id', groupId)
 }
 
@@ -55,8 +55,9 @@ const deleteGroup = (id, db = database) => {
 
 const getGroupsTags = (groupId, db = database) => {
   return db('posts')
-    .join('tags', 'tags.post_id', 'posts.id')
-    .select()
+    .join('post_tags', 'post_tags.post_id', 'posts.id')
+    .join('tags', 'tags.id', 'post_tags.tag_id')
+    .select('tag', 'tag_id as id')
     .where('group_id', groupId)
 }
 

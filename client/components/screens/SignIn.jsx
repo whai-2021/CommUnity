@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { loginUser } from '../../apis/passportapi'
+import { loginUser, getUser } from '../../apis/passportapi'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { setUser } from '../../actions/user'
 
 const initialForm = {
   username: '',
@@ -24,8 +28,17 @@ function SignIn (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'Successfully Authenticated') {
-          // need to save user to redux state
-          props.history.push('/')
+          // eslint-disable-next-line promise/no-nesting
+          getUser()
+            .then(result => {
+              props.dispatch(setUser(result))
+              props.history.push('/whatshappening')
+              return null
+            })
+            .catch(err => {
+              console.log(err.message)
+              return null
+            })
         } else {
           setError(result)
         }
@@ -40,9 +53,9 @@ function SignIn (props) {
         <h2 className="text-center text-3xl leading-9 font-extrabold">Sign In to your account</h2>
         <p className="text-center text-sm leading-5">
           Or
-          <span className="text-blue-400 mx-2">
+          <Link to='/register'><span className="text-blue-400 mx-2">
             Create an account
-          </span>
+          </span></Link>
         </p>
         {error && <h3 className="text-center text-red-700">Error: {error}</h3>}
         <form onSubmit={handleSumbit}>
@@ -66,4 +79,11 @@ function SignIn (props) {
     </div>
   )
 }
-export default SignIn
+
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(SignIn)
