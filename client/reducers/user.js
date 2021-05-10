@@ -1,6 +1,5 @@
-// const initialState = { id: 2, last_name: 'Guiang', first_name: 'Ysabel', username: 'ysabel', email: 'yg@yahoo.com' }
-const initialState = false
-function user (state = initialState, action) {
+// deleted commented out code, and write tests
+function user (state = false, action) {
   switch (action.type) {
     case 'SET_USER':
       return action.user

@@ -19,7 +19,7 @@ function GroupPage (props) {
   const changeCreatePost = () => {
     setCreatePost(!createPost)
   }
-  
+
   function isUserInGroup () {
     return members.find(member => member.id === props.user.id)
   }

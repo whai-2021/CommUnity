@@ -4,11 +4,16 @@ const router = express.Router()
 const db = require('../db/util/posts')
 const tagsDb = require('../db/util/tags')
 
+// Yo, boss, write me some tests, I'm dying over here
+
 // GET all posts
 // GET Posts for a group
 // GET posts in a group by tag
 router.get('/', (req, res) => {
   const { id, groupId, tag } = req.query
+
+  // instead of writing a swiss army route that does all the things just make separate routes, especially since the vars are mutually exclusive. e.g. if id is set it won't listen for any other ones
+  // if you really wanted to do it this way then at least extract the function (e.g. line 17:24 somewhere else so you can make it a single line
 
   if (id) {
     db.getPost(id)
