@@ -27,7 +27,7 @@ const getUserByUsername = (username, db = database) => {
 }
 
 const addUser = (user, db = database) => {
-  bcrypt.hash(user.password_hash, saltRounds)
+  return bcrypt.hash(user.password_hash, saltRounds)
     .then(result => {
       user.password_hash = result
       // eslint-disable-next-line promise/no-nesting

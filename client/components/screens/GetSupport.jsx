@@ -1,6 +1,5 @@
 import React from 'react'
 import PageLinks from '../PageLinks'
-
 import Footer from '../Footer'
 
 function GetSupport () {

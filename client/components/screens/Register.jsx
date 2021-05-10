@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { registerUser } from '../../apis/passportapi'
+import { registerUser, getUser } from '../../apis/passportapi'
+import { setUser } from '../../actions/user'
+import { connect } from 'react-redux'
 
 // might have to change to camelCase
 const initialForm = {
@@ -28,8 +30,17 @@ function Register (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'User Created') {
-          props.history.push('/whatshappening')
-          // need to save user to redux state
+          // eslint-disable-next-line promise/no-nesting
+          getUser()
+            .then(newUser => {
+              props.dispatch(setUser(newUser))
+              props.history.push('/whatshappening')
+              return null
+            })
+            .catch(err => {
+              console.log(err.message)
+              return null
+            })
         } else {
           setError(result)
         }
@@ -89,4 +100,10 @@ function Register (props) {
   )
 }
 
-export default Register
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Register)
