@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { getGroupById, getGroupMembers, getGroupsTags, addUserToGroup, deleteUserFromGroup } from '../../apis/groups'
 import { getPostsByGroup } from '../../apis/posts'
 import Post from '../Post'
+import CreatePost from '../CreatePost'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
 function GroupPage (props) {
@@ -13,9 +14,37 @@ function GroupPage (props) {
   const [members, setMembers] = useState([])
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
+  const [createPost, setCreatePost] = useState(false)
 
+  const changeCreatePost = () => {
+    setCreatePost(!createPost)
+  }
+  
   function isUserInGroup () {
     return members.find(member => member.id === props.user.id)
+  }
+
+  const getTags = () => {
+    getGroupsTags(groupId)
+      .then(tags => {
+        setTags(tags)
+        return null
+      })
+      .catch(e => {
+        console.log(e.message)
+      })
+  }
+
+  const getPosts = () => {
+    getPostsByGroup(groupId)
+      .then((posts) => {
+        setPosts(posts)
+        getTags()
+        return null
+      })
+      .catch(e => {
+        console.log(e.message)
+      })
   }
 
   useEffect(() => {
@@ -38,24 +67,8 @@ function GroupPage (props) {
         console.log(e.message)
       })
 
-    getPostsByGroup(groupId)
-      .then((posts) => {
-        setPosts(posts)
-        return null
-      })
-      .catch(e => {
-        console.log(e.message)
-      })
-
-    getGroupsTags(groupId)
-      .then(tags => {
-        setTags(tags)
-        return null
-      })
-      .catch(e => {
-        console.log(e.message)
-      })
-  }, [])
+    getPosts()
+  }, [groupId])
 
   function handleClick (evt) {
     evt.preventDefault()
@@ -100,15 +113,21 @@ function GroupPage (props) {
         <div className="grid grid-cols-4 gap-8">
           <div className='px-8 py-4 flex flex-col sticky top-24 h-screen bg-white'>
             <h3 className="font-semibold text-xl text-gray-600 pb-4">Tags</h3>
-            {tags.length > 0 && tags.map((tag) =>
-              <button key={tag.id} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded'>{tag.tag}</button>
-            )}
+            <div className="grid grid-cols-1 gap-4">
+              {tags.length > 0 && tags.map((tag) =>
+                <button key={tag.id} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded'>{tag.tag}</button>
+              )}
+            </div>
           </div>
           <div className="col-span-2 px-8 py-4">
-            <h3 className="font-semibold text-2xl text-gray-600 pb-4">Feed</h3>
+            <div className="flex justify-between contents-center pb-8">
+              <h3 className="font-semibold text-2xl text-gray-600">Feed</h3>
+              {!createPost && <button onClick={changeCreatePost} className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg hover:text-white py-2 px-4 rounded'>Create Post</button>}
+            </div>
             <div className="grid grid-cols-1 gap-8">
+              {createPost && <CreatePost getPosts={getPosts} changeCreatePost={changeCreatePost} groupId={groupId} />}
               {posts.length > 0 && posts.map((post) =>
-                <Post post={post} key={post.id}/>
+                <Post post={post} key={post.post_id} getPosts={getPosts}/>
               )}
             </div>
           </div>

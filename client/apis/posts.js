@@ -1,5 +1,4 @@
 import request from 'superagent'
-
 const rootUrl = '/api/v1/posts'
 
 export function getPostsByGroup (groupId) {
@@ -11,5 +10,18 @@ export function getPostsByGroup (groupId) {
 export function getPostTags (postId) {
   return request
     .get(rootUrl + '/' + postId + '/tags')
+    .then(res => res.body)
+}
+
+export function createPost (post, tags) {
+  return request
+    .post(rootUrl)
+    .send({ post, tags })
+    .then(res => res.body)
+}
+
+export function deletePost (postId) {
+  return request
+    .delete(rootUrl + `/${postId}`)
     .then(res => res.body)
 }

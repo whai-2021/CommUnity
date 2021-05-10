@@ -29,7 +29,10 @@ export function getGroupMembers (groupId) {
 export function getGroupsTags (groupId) {
   return request
     .get(rootUrl + '/' + groupId + '/tags')
-    .then(res => res.body)
+    .then(res => {
+      console.log(res.body)
+      return res.body
+    })
 }
 
 export function addUserToGroup (groupId, user) {

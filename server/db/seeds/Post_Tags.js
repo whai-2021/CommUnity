@@ -1,10 +1,10 @@
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('tags').del()
+  return knex('post_tags').del()
     .then(function () {
       // Inserts seed entries
-      return knex('tags').insert([
-        { id: 1, tag: 'caleb' }
+      return knex('post_tags').insert([
+        { post_id: 1, tag_id: 1 }
       ])
     })
 }
