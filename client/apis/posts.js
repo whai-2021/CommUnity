@@ -13,3 +13,10 @@ export function getPostTags (postId) {
     .get(rootUrl + '/' + postId + '/tags')
     .then(res => res.body)
 }
+
+export function createPost (post, tags) {
+  return request
+    .post(rootUrl)
+    .send(post)
+    .then(res => res.body)
+}
