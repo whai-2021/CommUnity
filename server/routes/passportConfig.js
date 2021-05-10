@@ -25,7 +25,21 @@ function initialize (passport) {
   }))
   passport.serializeUser((user, done) => done(null, user.id))
   passport.deserializeUser((id, done) => {
-    return done(null, users.getUserById(id))
+    users.getUserById(id)
+      .then((user) => {
+        const userInformation = {
+          id: user.id,
+          username: user.username,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email
+        }
+        return done(null, userInformation)
+      })
+      .catch(err => {
+        console.log(err.message)
+        return null
+      })
   })
 }
 
