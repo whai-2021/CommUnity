@@ -98,9 +98,8 @@ router.delete('/:groupId', (req, res) => {
 // PUT add a user to a group
 router.put('/:groupId/members', (req, res) => {
   const groupId = Number(req.params.groupId)
-  const { userId } = req.body
-
-  db.addMemberToGroup(userId, groupId)
+  const { id } = req.body
+  db.addMemberToGroup(id, groupId)
     .then((group) => {
       res.json(group)
       return null
@@ -127,13 +126,14 @@ router.get('/:groupId/members', (req, res) => {
 })
 
 // DELETE user from a group
-router.delete('/:id/members', (req, res) => {
-  const id = Number(req.params.id)
-  const { userId } = req.body
+router.delete('/:groupId/members', (req, res) => {
+  const groupId = Number(req.params.groupId)
+  const { id } = req.body
 
-  db.removeMemberFromGroup(userId, id)
+  db.removeMemberFromGroup(id, groupId)
     .then(() => {
-      db.getGroupMembers(id)
+      // eslint-disable-next-line promise/no-nesting
+      db.getGroupMembers(groupId)
         .then(members => {
           res.json(members)
           return null
