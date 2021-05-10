@@ -23,7 +23,7 @@ const addGroup = ({ name, regionId }, db = database) => {
 const getGroupMembers = (groupId, db = database) => {
   return db('group_members')
     .join('users', 'users.id', 'group_members.user_id')
-    .select()
+    .select('first_name', 'last_name', 'users.id')
     .where('group_id', groupId)
 }
 

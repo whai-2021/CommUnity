@@ -10,7 +10,7 @@ beforeEach(() => testDb.seed.run())
 
 // getGroups
 test('can get all groups', () => {
-  const expected = 3
+  const expected = 15
   return db.getGroups(testDb)
     .then(groups => {
       return expect(groups).toHaveLength(expected)

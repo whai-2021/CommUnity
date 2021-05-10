@@ -18,3 +18,9 @@ export function registerUser (user) {
     .send(user)
     .then(res => res.body)
 }
+
+export function getUser () {
+  return request
+    .get(rootUrl + '/user')
+    .then(res => res.body)
+}
