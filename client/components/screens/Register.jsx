@@ -3,12 +3,11 @@ import { registerUser, getUser } from '../../apis/passportapi'
 import { setUser } from '../../actions/user'
 import { connect } from 'react-redux'
 
-// might have to change to camelCase
 const initialForm = {
-  first_name: '',
-  last_name: '',
+  firstName: '',
+  lastName: '',
   username: '',
-  password_hash: '',
+  password: '',
   email: ''
 }
 
@@ -30,26 +29,29 @@ function Register (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'User Created') {
-          // just return the promise and move the then block to below line 49, you would need to test to see if newUser exists before doing the dispatch/redirect
-          // eslint-disable-next-line promise/no-nesting
-          getUser()
-            .then(newUser => {
-              props.dispatch(setUser(newUser))
-              props.history.push('/whatshappening')
-              return null
-            })
-            .catch(err => {
-              console.log(err.message)
-              return null
-            })
+          return null
         } else {
           setError(result)
+          return null
         }
-        return null
       })
       .catch(err =>
         console.log(err.message))
+
+    if (getUser()) {
+      getUser()
+        .then(newUser => {
+          props.dispatch(setUser(newUser))
+          props.history.push('/whatshappening')
+          return null
+        })
+        .catch(err => {
+          console.log(err.message)
+          return null
+        })
+    }
   }
+
   return (
     <div className="signIn-page mt-16 mb-12">
       <div>
@@ -59,13 +61,13 @@ function Register (props) {
           <div className="flex justify-center mt-4">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label className="block uppercase tracking-wide text-blue-400 text-xs font-bold mb-2" htmlFor="name">First Name</label>
-              <input type="name" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='first_name' onChange={handleChange} value={form.first_name}/>
+              <input type="name" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='firstName' onChange={handleChange} value={form.first_name}/>
             </div>
           </div>
           <div className="flex justify-center mt-4">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label className="block uppercase tracking-wide text-blue-400 text-xs font-bold mb-2" htmlFor="name">Last Name</label>
-              <input type="name" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='last_name' onChange={handleChange} value={form.last_name} />
+              <input type="name" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='lastName' onChange={handleChange} value={form.last_name} />
             </div>
           </div>
           <div className="flex justify-center mt-4">
@@ -83,7 +85,7 @@ function Register (props) {
           <div className="flex justify-center mt-4">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label className="block uppercase tracking-wide text-blue-400 text-xs font-bold mb-2" htmlFor="password">Password</label>
-              <input type="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='password_hash' onChange={handleChange} value={form.password_hash} />
+              <input type="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='password' onChange={handleChange} value={form.password_hash} />
             </div>
           </div>
           <div className="flex justify-center mt-4">

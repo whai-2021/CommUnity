@@ -1,6 +1,6 @@
 import '../index.css'
 import React, { useState } from 'react'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import Nav from './Nav'
 import Home from './screens/Home'
 import SignIn from './screens/SignIn'

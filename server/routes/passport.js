@@ -44,27 +44,6 @@ router.post('/register', (req, res) => {
   users.userExists(newUser.username)
     .then(result => {
       if (result === false) {
-        // instead of disabling the no-nesting you could return the promise and deal with it in a future then block
-        // I would also be tempoted to make a helper function called addUserAndLogin (pass it the user and req.logIn as args) which would simplify this function
-        // eslint-disable-next-line promise/no-nesting
-        users.addUser(newUser)
-          .then(user => {
-            const userDetails = {
-              id: user.id,
-              username: user.username,
-              first_name: user.first_name,
-              last_name: user.last_name
-            }
-            req.logIn(userDetails, err => {
-              if (err) throw err
-              res.json('User Created')
-            })
-            return null
-          })
-          .catch(err => {
-            console.log(err.message)
-            return null
-          })
         return null
       } else {
         res.json('username already exists')
@@ -75,6 +54,10 @@ router.post('/register', (req, res) => {
       console.log(err.message)
       return null
     })
+  req.logIn(addUser(newUser), err => {
+    if (err) throw err
+    res.json('User Created')
+  })
 })
 
 router.delete('/logout', (req, res) => {
@@ -83,3 +66,20 @@ router.delete('/logout', (req, res) => {
 })
 
 module.exports = router
+
+function addUser (newUser) {
+  users.addUser(newUser)
+    .then(user => {
+      const userDetails = {
+        id: user.id,
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name
+      }
+      return userDetails
+    })
+    .catch(err => {
+      console.log(err.message)
+      return null
+    })
+}
