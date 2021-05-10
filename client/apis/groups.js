@@ -34,3 +34,15 @@ export function getGroupsTags (groupId) {
       return res.body
     })
 }
+
+export function addUserToGroup (groupId, user) {
+  return request
+    .put(rootUrl + '/' + groupId + '/members')
+    .send(user)
+}
+
+export function deleteUserFromGroup (groupId, user) {
+  return request
+    .delete(rootUrl + '/' + groupId + '/members')
+    .send(user)
+}
