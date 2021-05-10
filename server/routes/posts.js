@@ -5,8 +5,7 @@ const db = require('../db/util/posts')
 const tagsDb = require('../db/util/tags')
 
 // GET all posts
-// GET Posts for a group
-// GET posts in a group by tag
+
 router.get('/', (req, res) => {
   const { id, groupId, tag } = req.query
 
@@ -19,7 +18,7 @@ router.get('/', (req, res) => {
       .catch(e => {
         res.status(500).send(e.message)
       })
-  } else if (groupId) {
+  } else if (groupId && !tag) {
     db.getPostsByGroup(groupId)
       .then(posts => {
         res.json(posts)
@@ -28,8 +27,8 @@ router.get('/', (req, res) => {
       .catch(e => {
         res.status(500).send(e.message)
       })
-  } else if (tag) {
-    db.getGroupPostsByTag(tag)
+  } else if (tag && groupId) {
+    db.getGroupPostsByTag(tag, groupId)
       .then(posts => {
         res.json(posts)
         return null
@@ -48,6 +47,9 @@ router.get('/', (req, res) => {
       })
   }
 })
+
+// GET Group posts by tag
+router.get('/1/tag/posts')
 
 // POST create post
 router.post('/', (req, res) => {

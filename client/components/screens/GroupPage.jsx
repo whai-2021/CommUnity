@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { getGroupById, getGroupMembers, getGroupsTags, addUserToGroup, deleteUserFromGroup } from '../../apis/groups'
-import { getPostsByGroup } from '../../apis/posts'
+import { getPostsByGroup, getPostsByTag } from '../../apis/posts'
 import Post from '../Post'
 import CreatePost from '../CreatePost'
 
@@ -14,6 +14,7 @@ function GroupPage (props) {
   const [members, setMembers] = useState([])
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
+  const [currentTag, setCurrentTag] = useState(null)
   const [createPost, setCreatePost] = useState(false)
 
   const changeCreatePost = () => {
@@ -36,15 +37,27 @@ function GroupPage (props) {
   }
 
   const getPosts = () => {
-    getPostsByGroup(groupId)
-      .then((posts) => {
-        setPosts(posts)
-        getTags()
-        return null
-      })
-      .catch(e => {
-        console.log(e.message)
-      })
+    if (!currentTag) {
+      getPostsByGroup(groupId)
+        .then((posts) => {
+          setPosts(posts)
+          getTags()
+          return null
+        })
+        .catch(e => {
+          console.log(e.message)
+        })
+    } else {
+      getPostsByTag(currentTag)
+        .then((posts) => {
+          setPosts(posts)
+          getTags()
+          return null
+        })
+        .catch(e => {
+          console.log(e.message)
+        })
+    }
   }
 
   useEffect(() => {
@@ -115,7 +128,7 @@ function GroupPage (props) {
             <h3 className="font-semibold text-xl text-gray-600 pb-4">Tags</h3>
             <div className="grid grid-cols-1 gap-4">
               {tags.length > 0 && tags.map((tag) =>
-                <button key={tag.id} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded'>{tag.tag}</button>
+                <button key={tag.id} onClick={() => setCurrentTag(tag.id)} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded'>{tag.tag}</button>
               )}
             </div>
           </div>
