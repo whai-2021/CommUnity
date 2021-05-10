@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getGroupById, getGroupMembers, getGroupsTags, addUserToGroup, deleteUserFromGroup } from '../../apis/groups'
+import { getGroupById, getGroupMembers, addUserToGroup, deleteUserFromGroup } from '../../apis/groups'
 import { getPostsByGroup, getPostsByTag } from '../../apis/posts'
+import { getGroupsTags } from '../../apis/tags'
 import Post from '../Post'
 import CreatePost from '../CreatePost'
 

@@ -44,19 +44,4 @@ router.delete('/:userId', (req, res) => {
     })
 })
 
-// GET Users groups
-router.get('/:userId/groups', (req, res) => {
-  const userId = Number(req.query.userId)
-
-  db.getUsersGroups(userId)
-    .then((groups) => {
-      res.json(groups)
-      return null
-    })
-    .catch(err => {
-      console.log(err.message)
-      res.sendStatus(500)
-    })
-})
-
 module.exports = router

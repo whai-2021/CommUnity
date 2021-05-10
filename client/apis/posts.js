@@ -3,19 +3,13 @@ const rootUrl = '/api/v1/posts'
 
 export function getPostsByGroup (groupId) {
   return request
-    .get(rootUrl + '/?groupId=' + groupId)
+    .get(rootUrl + '/group/' + groupId)
     .then(res => res.body)
 }
 
-export function getPostsByTag (tagId) {
+export function getPostsByTag (tagId, groupId) {
   return request
-    .get(rootUrl + '/?tag=' + tagId)
-    .then(res => res.body)
-}
-
-export function getPostTags (postId) {
-  return request
-    .get(rootUrl + '/' + postId + '/tags')
+    .get(rootUrl + '/group/' + groupId + '/' + tagId)
     .then(res => res.body)
 }
 

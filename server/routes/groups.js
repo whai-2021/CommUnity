@@ -31,6 +31,21 @@ router.get('/:groupId', (req, res) => {
     })
 })
 
+// GET Users groups
+router.get('/user/:userId', (req, res) => {
+  const userId = Number(req.query.userId)
+
+  db.getUsersGroups(userId)
+    .then((groups) => {
+      res.json(groups)
+      return null
+    })
+    .catch(err => {
+      console.log(err.message)
+      res.sendStatus(500)
+    })
+})
+
 // POST create a group
 router.post('/', (req, res) => {
   const { name, regionId } = req.body
@@ -120,9 +135,7 @@ router.delete('/:groupId/members', (req, res) => {
 
   db.removeMemberFromGroup(id, groupId)
     .then(() => {
-      // instead of disabling the linter just return the promise and chain the then block like so
-      // if there was a test I would run it but, hey it probably works
-      // living on the wild side
+      // return promises like this instead of nesting them
       return db.getGroupMembers(groupId)
     })
     .then(members => {

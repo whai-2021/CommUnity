@@ -17,7 +17,7 @@ router.get('/:postId', (req, res) => {
 })
 
 // GET a groups tags
-router.get('/:groupId', (req, res) => {
+router.get('/group/:groupId', (req, res) => {
   const id = Number(req.params.groupId)
 
   db.getGroupsTags(id)
