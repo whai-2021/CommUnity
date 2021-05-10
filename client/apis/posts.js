@@ -7,6 +7,12 @@ export function getPostsByGroup (groupId) {
     .then(res => res.body)
 }
 
+export function getPostsByTag (tagId) {
+  return request
+    .get(rootUrl + '/?tag=' + tagId)
+    .then(res => res.body)
+}
+
 export function getPostTags (postId) {
   return request
     .get(rootUrl + '/' + postId + '/tags')
