@@ -4,6 +4,7 @@ import PageLinks from '../PageLinks'
 function NewsFeed () {
   return (
     <>
+      {/* placeholder */}
       <PageLinks/>
     </>
   )

@@ -33,22 +33,24 @@ const App = () => {
       <Router>
         <Nav toggle={toggle}/>
         <Dropdown isOpen={isOpen} toggle={toggle} />
-        <Route exact path='/' component={Home} />
-        <Route exact path='/signIn' component={SignIn} />
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/myAccount' component={MyAccount} />
-        <Route exact path='/newsfeed' component={NewsFeed} />
-        <Route exact path='/whatshappening' component={WhatsHappening} />
-        <Route exact path='/information' component={Information} />
-        <Route exact path='/getsupport' component={GetSupport} />
-        <Route exact path='/whatshappening/:id' component={GroupPage} />
-        <Route exact path='/pagelinks' component={PageLinks} />
-        <Route exact path='/information/emergency' component={Emergency} />
-        <Route exact path='/information/english' component={EnglishSchools} />
-        <Route exact path='/information/family' component={Family} />
-        <Route exact path='/information/health' component={Health} />
-        <Route exact path='/information/important' component={Important} />
-        <Route exact path='/information/transport' component={Transport} />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/signIn' component={SignIn} />
+          <Route path='/register' component={Register} />
+          <Route path='/myAccount' component={MyAccount} />
+          <Route path='/newsfeed' component={NewsFeed} />
+          <Route exact path='/whatshappening' component={WhatsHappening} />
+          <Route exact path='/information' component={Information} />
+          <Route path='/getsupport' component={GetSupport} />
+          <Route path='/whatshappening/:id' component={GroupPage} />
+          <Route path='/pagelinks' component={PageLinks} />
+          <Route path='/information/emergency' component={Emergency} />
+          <Route path='/information/english' component={EnglishSchools} />
+          <Route path='/information/family' component={Family} />
+          <Route path='/information/health' component={Health} />
+          <Route path='/information/important' component={Important} />
+          <Route path='/information/transport' component={Transport} />
+        </Switch>
 
       </Router>
     </div>
