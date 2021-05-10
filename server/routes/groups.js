@@ -155,7 +155,9 @@ router.get('/:groupId/tags', (req, res) => {
 
   db.getGroupsTags(id)
     .then(tags => {
-      res.json(tags)
+      res.json(tags.filter((tag, index, arr) => {
+        return arr.findIndex(item => (item.id === tag.id)) === index
+      }))
       return null
     })
     .catch(err => {
