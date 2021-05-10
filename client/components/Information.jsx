@@ -1,6 +1,6 @@
 import React from 'react'
 import PageLinks from './PageLinks'
-import { HashRouter as Router, Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Information () {
   return (

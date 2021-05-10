@@ -1,14 +1,16 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { IsAuthenticated, NotAuthenticated } from './Authentication'
 import { connect } from 'react-redux'
 import { logOffUser } from '../apis/passportapi'
 import { deleteUser } from '../actions/user'
 
 const Dropdown = ({ isOpen, toggle, dispatch }) => {
-  function handleLogOff () {
+  function handleLogOff (evt) {
+    evt.preventDefault()
     logOffUser()
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         dispatch(deleteUser())
         return null
       })
@@ -27,12 +29,12 @@ const Dropdown = ({ isOpen, toggle, dispatch }) => {
       onClick={toggle}
     >
       <NotAuthenticated>
-        <NavLink to='signIn' className='pr-4 mt-8'>Login</NavLink>
-        <NavLink to='register' className='pr-4'>Register</NavLink>
+        <Link to='signIn' className='pr-4 mt-8'>Login</Link>
+        <Link to='register' className='pr-4'>Register</Link>
       </NotAuthenticated>
       <IsAuthenticated>
-        <NavLink to='/myAccount' className='pr-4 mt-8'>My Account</NavLink>
-        <NavLink to='/' className='pr-4' onClick={handleLogOff}>Log off</NavLink>
+        <Link to='/myAccount' className='pr-4 mt-8'>My Account</Link>
+        <NavLink to='/' className='pr-4' onClick={handleLogOff}>Log off div</NavLink>
       </IsAuthenticated>
     </div>
   )
