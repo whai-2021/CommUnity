@@ -3,35 +3,17 @@ const router = express.Router()
 
 const db = require('../db/util/groups')
 
-
-// Where forart though my sweet router tests, my soul is a pale shadow of itself without thee
-
-// GET all groups and get User groups
+// GET all groups
 router.get('/', (req, res) => {
-  const userId = Number(req.query.userId)
-
-  // this feels like it should be two separate routes, one which takes a userId and one which doesn't
-  if (userId) {
-    db.getUsersGroups(userId)
-      .then((groups) => {
-        res.json(groups)
-        return null
-      })
-      .catch(err => {
-        console.log(err.message)
-        res.sendStatus(500)
-      })
-  } else {
-    db.getGroups()
-      .then(groups => {
-        res.json(groups)
-        return null
-      })
-      .catch(err => {
-        res.sendStatus(500)
-        console.log(err.message)
-      })
-  }
+  db.getGroups()
+    .then(groups => {
+      res.json(groups)
+      return null
+    })
+    .catch(err => {
+      res.sendStatus(500)
+      console.log(err.message)
+    })
 })
 
 // GET specific group
@@ -49,7 +31,7 @@ router.get('/:groupId', (req, res) => {
     })
 })
 
-// POST group
+// POST create a group
 router.post('/', (req, res) => {
   const { name, regionId } = req.body
 
@@ -103,9 +85,8 @@ router.delete('/:groupId', (req, res) => {
 
 // PUT add a user to a group
 router.put('/:groupId/members', (req, res) => {
-  // curious that only one of these vars is cast as a Number - might be worth double checking that this is required
   const groupId = Number(req.params.groupId)
-  const { id } = req.body
+  const id = Number(req.body.id)
   db.addMemberToGroup(id, groupId)
     .then((group) => {
       res.json(group)
@@ -146,22 +127,6 @@ router.delete('/:groupId/members', (req, res) => {
     })
     .then(members => {
       res.json(members)
-      return null
-    })
-    .catch(err => {
-      console.log(err.message)
-      res.sendStatus(500)
-    })
-})
-
-router.get('/:groupId/tags', (req, res) => {
-  const id = Number(req.params.groupId)
-
-  db.getGroupsTags(id)
-    .then(tags => {
-      res.json(tags.filter((tag, index, arr) => {
-        return arr.findIndex(item => (item.id === tag.id)) === index
-      }))
       return null
     })
     .catch(err => {
