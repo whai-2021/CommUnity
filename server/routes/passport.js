@@ -44,6 +44,8 @@ router.post('/register', (req, res) => {
   users.userExists(newUser.username)
     .then(result => {
       if (result === false) {
+        // instead of disabling the no-nesting you could return the promise and deal with it in a future then block
+        // I would also be tempoted to make a helper function called addUserAndLogin (pass it the user and req.logIn as args) which would simplify this function
         // eslint-disable-next-line promise/no-nesting
         users.addUser(newUser)
           .then(user => {

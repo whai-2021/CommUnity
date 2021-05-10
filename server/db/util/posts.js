@@ -27,13 +27,17 @@ const getPost = (id, db = database) => {
 }
 
 const addPost = ({ userId, groupId, body, createdAt }, tags, db = database) => {
+  // function too big, etract helper functions to make it simpler
   return db('posts').insert({ author_id: userId, group_id: groupId, body, created_at: createdAt })
     .then(postId => {
       if (tags) {
+        // I would pull this whole block out into a stand alone function like addTagsToPost(tags)
         const promises = tags.map((tag) => {
           tagExists(tag)
             .then(tagExists => {
               if (tagExists) {
+                // extract this block into a separate function
+                // e.g. addExistingTagToPost(tagId, postId)
                 getTag(tag)
                   .then((tagRes) => {
                     addTagToPost({ tagId: tagRes.id, postId })
@@ -49,6 +53,8 @@ const addPost = ({ userId, groupId, body, createdAt }, tags, db = database) => {
                     console.log(e.message)
                   })
               } else {
+                // extract to own function
+                // e.g. addNewTagToPost(tag, postId)
                 addTag(tag)
                   .then(tagId => {
                     addTagToPost({ tagId, postId })

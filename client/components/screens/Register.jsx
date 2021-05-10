@@ -30,6 +30,7 @@ function Register (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'User Created') {
+          // just return the promise and move the then block to below line 49, you would need to test to see if newUser exists before doing the dispatch/redirect
           // eslint-disable-next-line promise/no-nesting
           getUser()
             .then(newUser => {

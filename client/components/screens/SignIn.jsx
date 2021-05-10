@@ -28,6 +28,7 @@ function SignIn (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'Successfully Authenticated') {
+          // same as in register, avoid the nested promise
           // eslint-disable-next-line promise/no-nesting
           getUser()
             .then(result => {
