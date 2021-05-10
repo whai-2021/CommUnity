@@ -94,7 +94,7 @@ function GroupPage (props) {
             <div className="grid grid-cols-1 gap-8">
               {createPost && <CreatePost changeCreatePost={changeCreatePost} getPosts={getPosts} groupId={groupId} />}
               {posts.length > 0 && posts.map((post) =>
-                <Post post={post} key={post.post_id}/>
+                <Post post={post} key={post.post_id} getPosts={getPosts}/>
               )}
             </div>
           </div>

@@ -7,7 +7,7 @@ const getPosts = (db = database) => {
 const getPostsByGroup = (groupId, db = database) => {
   return db('posts')
     .join('users', 'users.id', 'posts.author_id')
-    .select()
+    .select('*', 'posts.id as id')
     .where('group_id', groupId)
 }
 
