@@ -39,8 +39,6 @@ router.post('/login', async (req, res, next) => {
   })(req, res, next)
 })
 
-// need to make a log out route
-
 router.post('/register', (req, res) => {
   const newUser = req.body
   users.userExists(newUser.username)
@@ -75,6 +73,11 @@ router.post('/register', (req, res) => {
       console.log(err.message)
       return null
     })
+})
+
+router.delete('/logout', (req, res) => {
+  req.logOut()
+  res.json('Logged Out')
 })
 
 module.exports = router

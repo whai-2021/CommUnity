@@ -24,3 +24,9 @@ export function getUser () {
     .get(rootUrl + '/user')
     .then(res => res.body)
 }
+
+export function logOffUser () {
+  return request
+    .delete(rootUrl + '/logout')
+    .then(res => res.body)
+}
