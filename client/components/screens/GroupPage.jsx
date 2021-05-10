@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getGroupById, getGroupMembers, getGroupsTags } from '../../apis/groups'
+import { getGroupById, getGroupMembers, getGroupsTags, addUserToGroup, deleteUserFromGroup } from '../../apis/groups'
 import { getPostsByGroup } from '../../apis/posts'
 import Post from '../Post'
 
@@ -13,6 +13,10 @@ function GroupPage (props) {
   const [members, setMembers] = useState([])
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
+
+  function isUserInGroup () {
+    return members.find(member => member.id === props.user.id)
+  }
 
   useEffect(() => {
     getGroupById(groupId)
@@ -45,7 +49,6 @@ function GroupPage (props) {
 
     getGroupsTags(groupId)
       .then(tags => {
-        console.log(tags)
         setTags(tags)
         return null
       })
@@ -53,6 +56,31 @@ function GroupPage (props) {
         console.log(e.message)
       })
   }, [])
+
+  function handleClick (evt) {
+    evt.preventDefault()
+    if (!isUserInGroup()) {
+      addUserToGroup(groupId, props.user)
+        .then(() => {
+          props.history.push('/whatshappening')
+          return null
+        })
+        .catch(err => {
+          console.log(err.message)
+          return null
+        })
+    } else {
+      deleteUserFromGroup(groupId, props.user)
+        .then(() => {
+          props.history.push('/whatshappening')
+          return null
+        })
+        .catch(err => {
+          console.log(err.message)
+          return null
+        })
+    }
+  }
 
   return (
     <>
@@ -67,7 +95,7 @@ function GroupPage (props) {
             </Link>
             <h2 className='text-4xl text-gray-700 font-semibold px-8'>{ group.name }</h2>
           </div>
-          <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xl hover:text-white py-2 px-12 rounded'>Join Group</button>
+          { isUserInGroup() ? <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xl hover:text-white py-2 px-12 rounded' onClick={handleClick}>Leave Group</button> : <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xl hover:text-white py-2 px-12 rounded' onClick={handleClick}>Join Group</button> }
         </div>
         <div className="grid grid-cols-4 gap-8">
           <div className='px-8 py-4 flex flex-col sticky top-24 h-screen bg-white'>
