@@ -1,4 +1,4 @@
-const db = require('./users')
+const db = require('./posts')
 
 const knex = require('knex')
 const testConfig = require('../knexfile').test
