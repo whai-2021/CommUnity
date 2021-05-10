@@ -1,5 +1,5 @@
 import '../index.css'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom'
 import Nav from './Nav'
 import Home from './screens/Home'
@@ -18,12 +18,20 @@ import Family from './inside information/Family'
 import Health from './inside information/Health'
 import Important from './inside information/Important'
 import Transport from './inside information/Transport'
+import Dropdown from './Dropdown'
 
 const App = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggle = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div>
       <Router>
-        <Route path='/' component={Nav} />
+        <Nav toggle={toggle}/>
+        <Dropdown isOpen={isOpen} toggle={toggle} />
         <Route exact path='/' component={Home} />
         <Route exact path='/signIn' component={SignIn} />
         <Route exact path='/register' component={Register} />
