@@ -18,6 +18,7 @@ import Family from './inside information/Family'
 import Health from './inside information/Health'
 import Important from './inside information/Important'
 import Transport from './inside information/Transport'
+import CreateGroup from './screens/CreateGroup'
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
         <Route exact path='/information/health' component={Health} />
         <Route exact path='/information/important' component={Important} />
         <Route exact path='/information/transport' component={Transport} />
+        <Route exact path='/whatshappening/creategroup' component={CreateGroup} />
 
       </Router>
     </div>
