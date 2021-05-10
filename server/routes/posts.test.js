@@ -9,10 +9,6 @@ jest.mock('../db/util/posts', () => ({
   getPosts: jest.fn()
 }))
 
-// beforeEach(() => {
-//   return jest.resetAllMocks()
-// })
-
 describe('GET /api/v1/posts', () => {
   const fakePosts = [{
     id: 5,
@@ -30,7 +26,6 @@ describe('GET /api/v1/posts', () => {
     return request(server)
       .get('/api/v1/posts')
       .then(res => {
-        // console.log(res.body)
         expect(res.body).toEqual(fakePosts)
         return null
       })
