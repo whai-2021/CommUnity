@@ -47,8 +47,9 @@ export function deleteUserFromGroup (groupId, user) {
     .send(user)
 }
 
-export function addGroup (name, regionId) {
+export function addGroup ({ name, regionId }) {
   return request
-    .post(rootUrl + '/')
+    .post(rootUrl)
     .send({ name, regionId })
+    .then(res => res.body)
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PageLinks from '../PageLinks'
-import { getUsersGroups, getGroups } from '../../apis/groups'
+import { getUsersGroups, getGroups, addGroup } from '../../apis/groups'
 import { IsAuthenticated, NotAuthenticated } from '../Authentication'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
