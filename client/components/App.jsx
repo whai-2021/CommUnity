@@ -6,6 +6,7 @@ import Home from './screens/Home'
 import SignIn from './screens/SignIn'
 import Register from './screens/Register'
 import MyAccount from './screens/MyAccount'
+import SavedPosts from './screens/SavedPosts'
 import NewsFeed from './screens/NewsFeed'
 import WhatsHappening from './screens/WhatsHappening'
 import Information from './Information'
@@ -38,6 +39,7 @@ const App = () => {
           <Route path='/signIn' component={SignIn} />
           <Route path='/register' component={Register} />
           <Route path='/myAccount' component={MyAccount} />
+          <Route path='/savedposts' component={SavedPosts} />
           <Route path='/newsfeed' component={NewsFeed} />
           <Route exact path='/whatshappening' component={WhatsHappening} />
           <Route exact path='/information' component={Information} />
