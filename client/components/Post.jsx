@@ -17,6 +17,10 @@ const Post = (props) => {
   }
 
   useEffect(() => {
+    refreshPosts()
+  }, [body])
+
+  function refreshPosts () {
     getPostTags(id)
       .then(res => {
         setTags(res)
@@ -30,7 +34,7 @@ const Post = (props) => {
         return null
       })
       .catch(err => console.log(err.message))
-  }, [body])
+  }
 
   const createdAtDate = new Date(createdAt)
 
@@ -38,6 +42,7 @@ const Post = (props) => {
     evt.preventDefault()
     savePost(id, props.user.id)
       .then(() => {
+        refreshPosts()
         return null
       })
       .catch(err => console.log(err.message))
@@ -46,6 +51,7 @@ const Post = (props) => {
     evt.preventDefault()
     unsavePost(id, props.user.id)
       .then(() => {
+        refreshPosts()
         return null
       })
       .catch(err => console.log(err.message))
