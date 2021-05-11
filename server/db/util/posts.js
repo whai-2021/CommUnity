@@ -136,7 +136,7 @@ const getSavedPosts = (userId, db = database) => {
     .where('user_id', userId)
     .join('posts', 'posts.id', 'saved_posts.post_id')
     .join('users', 'users.id', 'posts.author_id')
-    .select('posts.id as id', 'users.first_name', 'users.last_name', 'posts.body as body', 'posts.created_at')
+    .select('posts.id as id', 'users.first_name', 'users.last_name', 'posts.body as body', 'posts.created_at', 'posts.author_id as author_id')
 }
 
 module.exports = {
