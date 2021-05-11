@@ -31,7 +31,7 @@ function WhatsHappening (props) {
       .then(() => {
         return getGroups()
       })
-      .then((groups) =>{
+      .then((groups) => {
         setGroups(groups)
         setFormData(initialFormData)
         return null
@@ -72,7 +72,7 @@ function WhatsHappening (props) {
       .catch(err => {
         console.log(err.message)
       })
-  }, [])
+  }, [props.user.id])
 
   return (
     <>
