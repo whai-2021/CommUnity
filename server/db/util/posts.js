@@ -107,6 +107,20 @@ const deletePostTags = (postId, db = database) => {
   return db('post_tags').where('post_id', postId).delete()
 }
 
+// Post Votes
+
+const addVote = (vote, db = database) => {
+  return db('votes').insert(vote)
+}
+
+const deleteVote = (userId, postId, db = database) => {
+  return db('votes').delete().where('author_id', userId).andWhere('post_id', postId)
+}
+
+const getPostsVotes = (postId, db = database) => {
+  return db('votes').select().where('post_id', postId)
+}
+
 module.exports = {
   getPosts,
   getPost,
@@ -114,5 +128,8 @@ module.exports = {
   deletePost,
   getPostsByGroup,
   getGroupPostsByTag,
-  deletePostTags
+  deletePostTags,
+  getPostsVotes,
+  addVote,
+  deleteVote
 }

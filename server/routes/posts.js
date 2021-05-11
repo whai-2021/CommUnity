@@ -86,4 +86,45 @@ router.delete('/:postId', (req, res) => {
     })
 })
 
+// GET a posts votes
+router.get('/:postId/votes', (req, res) => {
+  const postId = Number(req.params.postId)
+  db.getPostsVotes(postId)
+    .then((votes) => {
+      res.sendStatus(votes)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
+// PUT a vote
+router.put('/:postId/votes', (req, res) => {
+  const postId = Number(req.params.postId)
+  const { userId, voteType } = req.body
+  db.addVote({ postId, userId, voteType })
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
+// DELETE a vote
+router.delete('/:postId/votes', (req, res) => {
+  const postId = Number(req.params.postId)
+  const { userId } = req.body
+  db.deleteVote(userId, postId)
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
 module.exports = router
