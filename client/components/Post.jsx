@@ -21,7 +21,7 @@ const Post = (props) => {
         return null
       })
       .catch(err => console.log(err.message))
-  }, [])
+  }, [body])
 
   const createdAtDate = new Date(createdAt)
 

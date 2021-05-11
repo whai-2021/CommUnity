@@ -15,7 +15,7 @@ function GroupPage (props) {
   const [members, setMembers] = useState([])
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
-  const [currentTag, setCurrentTag] = useState(null)
+  const [currentTag, setCurrentTag] = useState('all')
   const [createPost, setCreatePost] = useState(false)
 
   const changeCreatePost = () => {
@@ -37,9 +37,11 @@ function GroupPage (props) {
       })
   }
 
-  const getPosts = () => {
-    if (!currentTag) {
-      getPostsByGroup(groupId)
+  const getPosts = (tagId) => {
+    setCurrentTag(tagId)
+
+    if (tagId) {
+      getPostsByTag(tagId, groupId)
         .then((posts) => {
           setPosts(posts)
           getTags()
@@ -49,7 +51,7 @@ function GroupPage (props) {
           console.log(e.message)
         })
     } else {
-      getPostsByTag(currentTag)
+      getPostsByGroup(groupId)
         .then((posts) => {
           setPosts(posts)
           getTags()
@@ -128,8 +130,13 @@ function GroupPage (props) {
           <div className='px-8 py-4 flex flex-col sticky top-24 h-screen bg-white'>
             <h3 className="font-semibold text-xl text-gray-600 pb-4">Tags</h3>
             <div className="grid grid-cols-1 gap-4">
+              <button key="all-tag" onClick={() => {
+                getPosts()
+              }} className={`${!currentTag ? 'bg-blue-500 text-white' : 'bg-transparent text-blue-700'} hover:bg-blue-600  font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded`}>All Tags</button>
               {tags.length > 0 && tags.map((tag) =>
-                <button key={tag.id} onClick={() => setCurrentTag(tag.id)} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded'>{tag.tag}</button>
+                <button key={tag.id} onClick={() => {
+                  getPosts(tag.id)
+                }} className={`${currentTag === tag.id ? 'bg-blue-500 text-white' : 'bg-transparent text-blue-700'} hover:bg-blue-600  font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded`}>{tag.tag}</button>
               )}
             </div>
           </div>
