@@ -43,3 +43,9 @@ export function hasUserSavedPost (postId, userId) {
     .get(rootUrl + `/saved/${postId}/${userId}/`)
     .then(res => res.body)
 }
+
+export function getSavedPosts (userId) {
+  return request
+    .get(rootUrl + `/saved/${userId}`)
+    .then(res => res.body)
+}

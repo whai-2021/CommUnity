@@ -134,4 +134,19 @@ router.get('/saved/:postId/:userId', (req, res) => {
     })
 })
 
+// GET all saved posts for user
+router.get('/saved/:userId', (req, res) => {
+  const { userId } = req.params
+  db.getSavedPosts(userId)
+    .then((result) => {
+      res.json(result)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+      console.log(e)
+      return null
+    })
+})
+
 module.exports = router

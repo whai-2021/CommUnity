@@ -131,6 +131,14 @@ const hasUserSavedPost = (postId, userId, db = database) => {
     })
 }
 
+const getSavedPosts = (userId, db = database) => {
+  return db('saved_posts')
+    .where('user_id', userId)
+    .join('posts', 'posts.id', 'saved_posts.post_id')
+    .join('users', 'users.id', 'posts.author_id')
+    .select('posts.id as id', 'users.first_name', 'users.last_name', 'posts.body as body', 'posts.created_at')
+}
+
 module.exports = {
   getPosts,
   getPost,
@@ -141,5 +149,6 @@ module.exports = {
   deletePostTags,
   savePost,
   unsavePost,
-  hasUserSavedPost
+  hasUserSavedPost,
+  getSavedPosts
 }
