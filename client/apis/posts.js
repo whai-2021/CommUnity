@@ -26,6 +26,26 @@ export function deletePost (postId) {
     .then(res => res.body)
 }
 
+export function getPostsVotes (postId, userId) {
+  return request
+    .get(rootUrl + `/${postId}/votes?userId=${userId}`)
+    .then(res => res.body)
+}
+
+export function addVote (postId, userId, voteType) {
+  console.log(postId, userId, voteType)
+  return request
+    .put(rootUrl + `/${postId}/votes`)
+    .send({ userId, voteType })
+    .then(res => res.body)
+}
+
+export function deleteVote (postId, userId) {
+  return request
+    .delete(rootUrl + `/${postId}/votes`)
+    .send({ userId })
+}
+
 export function savePost (postId, userId) {
   return request
     .post(rootUrl + `/saved/${postId}`)

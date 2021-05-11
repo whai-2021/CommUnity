@@ -107,6 +107,36 @@ const deletePostTags = (postId, db = database) => {
   return db('post_tags').where('post_id', postId).delete()
 }
 
+// Post Votes
+
+const addVote = (vote, db = database) => {
+  return db('votes').insert(vote)
+}
+
+const deleteVote = (userId, postId, db = database) => {
+  return db('votes').delete().where('author_id', userId).andWhere('post_id', postId)
+}
+
+const getPostsVotes = (postId, db = database) => {
+  return db('votes').select().where('post_id', postId)
+}
+
+const deletePostsVotes = (postId, db = database) => {
+  return db('votes').delete().where('post_id', postId)
+}
+
+const voteExists = (userId, postId, db = database) => {
+  return db('votes')
+    .count('id as n')
+    .where('author_id', userId)
+    .andWhere('post_id', postId)
+    .then(count => {
+      return count[0].n > 0
+    })
+}
+
+// Save Votes
+
 const savePost = (postId, userId, db = database) => {
   return db('saved_posts')
     .insert({ post_id: postId, user_id: userId })
@@ -147,8 +177,13 @@ module.exports = {
   getPostsByGroup,
   getGroupPostsByTag,
   deletePostTags,
+  getPostsVotes,
+  addVote,
+  deleteVote,
+  deletePostsVotes,
   savePost,
   unsavePost,
   hasUserSavedPost,
-  getSavedPosts
+  getSavedPosts,
+  voteExists
 }
