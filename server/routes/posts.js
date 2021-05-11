@@ -35,7 +35,7 @@ router.get('/group/:groupId', (req, res) => {
 
   db.getPostsByGroup(groupId)
     .then(posts => {
-      res.json(posts)
+      res.json(posts.reverse())
       return null
     })
     .catch(e => {
@@ -47,10 +47,9 @@ router.get('/group/:groupId', (req, res) => {
 router.get('/group/:groupId/:tagId', (req, res) => {
   const groupId = Number(req.params.groupId)
   const tagId = Number(req.params.tagId)
-
   db.getGroupPostsByTag(tagId, groupId)
     .then(posts => {
-      res.json(posts)
+      res.json(posts.reverse())
       return null
     })
     .catch(e => {
@@ -75,6 +74,9 @@ router.post('/', (req, res) => {
 router.delete('/:postId', (req, res) => {
   const postId = Number(req.params.postId)
   db.deletePost(postId)
+    .then(() => {
+      return db.deletePostTags(postId)
+    })
     .then(() => {
       res.sendStatus(200)
       return null

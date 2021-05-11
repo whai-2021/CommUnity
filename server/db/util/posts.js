@@ -13,13 +13,14 @@ const getPostsByGroup = (groupId, db = database) => {
     .where('group_id', groupId)
 }
 
-const getGroupPostsByTag = (tag, groupId, db = database) => {
+const getGroupPostsByTag = (tagId, groupId, db = database) => {
   return db('posts')
     .join('post_tags', 'post_tags.post_id', 'posts.id')
     .join('tags', 'tags.id', 'post_tags.tag_id')
-    .select()
+    .join('users', 'users.id', 'posts.author_id')
+    .select('author_id', 'group_id', 'body', 'created_at', 'first_name', 'last_name', 'posts.id as id')
     .where('group_id', groupId)
-    .andWhere('tag', tag)
+    .andWhere('tags.id', tagId)
 }
 
 const getPost = (id, db = database) => {
@@ -102,11 +103,16 @@ const deletePost = (id, db = database) => {
   return db('posts').where('id', id).delete()
 }
 
+const deletePostTags = (postId, db = database) => {
+  return db('post_tags').where('post_id', postId).delete()
+}
+
 module.exports = {
   getPosts,
   getPost,
   addPost,
   deletePost,
   getPostsByGroup,
-  getGroupPostsByTag
+  getGroupPostsByTag,
+  deletePostTags
 }

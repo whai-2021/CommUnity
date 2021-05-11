@@ -33,7 +33,7 @@ router.get('/:groupId', (req, res) => {
 
 // GET Users groups
 router.get('/user/:userId', (req, res) => {
-  const userId = Number(req.query.userId)
+  const userId = Number(req.params.userId)
 
   db.getUsersGroups(userId)
     .then((groups) => {

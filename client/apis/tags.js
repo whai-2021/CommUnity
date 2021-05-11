@@ -6,7 +6,6 @@ export function getGroupsTags (groupId) {
   return request
     .get(rootUrl + '/group/' + groupId)
     .then(res => {
-      console.log(res.body)
       return res.body
     })
 }
