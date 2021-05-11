@@ -44,20 +44,15 @@ router.post('/register', (req, res) => {
   users.userExists(newUser.username)
     .then(result => {
       if (result === false) {
-        return null
+        return addUserAndLogIn(newUser, req, res)
       } else {
-        res.json('username already exists')
-        return null
+        return res.json('username already exists')
       }
     })
     .catch(err => {
       console.log(err.message)
       return null
     })
-  req.logIn(addUser(newUser), err => {
-    if (err) throw err
-    res.json('User Created')
-  })
 })
 
 router.delete('/logout', (req, res) => {
@@ -67,8 +62,8 @@ router.delete('/logout', (req, res) => {
 
 module.exports = router
 
-function addUser (newUser) {
-  users.addUser(newUser)
+function addUserAndLogIn (newUser, req, res) {
+  return users.addUser(newUser)
     .then(user => {
       const userDetails = {
         id: user.id,
@@ -77,6 +72,15 @@ function addUser (newUser) {
         last_name: user.last_name
       }
       return userDetails
+    })
+    .then((user) => {
+      return req.logIn(user, err => {
+        if (err) throw err
+      })
+    })
+    .then(() => {
+      res.json('User Created')
+      return null
     })
     .catch(err => {
       console.log(err.message)
