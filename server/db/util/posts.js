@@ -30,47 +30,7 @@ const addPost = ({ userId, groupId, body, createdAt }, tags, db = database) => {
   return db('posts').insert({ author_id: userId, group_id: groupId, body, created_at: createdAt })
     .then(postId => {
       if (tags) {
-        const promises = tags.map((tag) => {
-          tagExists(tag)
-            .then(tagExists => {
-              if (tagExists) {
-                getTag(tag)
-                  .then((tagRes) => {
-                    addTagToPost({ tagId: tagRes.id, postId })
-                      .then(() => {
-                        return null
-                      })
-                      .catch(e => {
-                        console.log(e.message)
-                      })
-                    return null
-                  })
-                  .catch(e => {
-                    console.log(e.message)
-                  })
-              } else {
-                addTag(tag)
-                  .then(tagId => {
-                    addTagToPost({ tagId, postId })
-                      .then(() => {
-                        return null
-                      })
-                      .catch(e => {
-                        console.log(e.message)
-                      })
-                    return null
-                  })
-                  .catch(e => {
-                    console.log(e.message)
-                  })
-              }
-              return null
-            })
-            .catch(e => {
-              console.log(e.message)
-            })
-          return null
-        })
+        const promises = addTagsToPost(tags, postId)
         Promise.all(promises)
           .then(() => {
             return null
@@ -86,7 +46,57 @@ const addPost = ({ userId, groupId, body, createdAt }, tags, db = database) => {
     })
 }
 
-// update post
+const addTagsToPost = (tags, postId) => {
+  return tags.map((tag) => {
+    tagExists(tag)
+      .then(tagExists => {
+        if (tagExists) {
+          addExistingTagToPost(tag, postId)
+        } else {
+          addNewTagToPost(tag, postId)
+        }
+        return null
+      })
+      .catch(e => {
+        console.log(e.message)
+      })
+    return null
+  })
+}
+
+const addExistingTagToPost = (tag, postId) => {
+  getTag(tag)
+    .then((tagRes) => {
+      addTagToPost({ tagId: tagRes.id, postId })
+        .then(() => {
+          return null
+        })
+        .catch(e => {
+          console.log(e.message)
+        })
+      return null
+    })
+    .catch(e => {
+      console.log(e.message)
+    })
+}
+
+const addNewTagToPost = (tag, postId) => {
+  addTag(tag)
+    .then(tagId => {
+      addTagToPost({ tagId, postId })
+        .then(() => {
+          return null
+        })
+        .catch(e => {
+          console.log(e.message)
+        })
+      return null
+    })
+    .catch(e => {
+      console.log(e.message)
+    })
+}
 
 const deletePost = (id, db = database) => {
   return db('posts').where('id', id).delete()

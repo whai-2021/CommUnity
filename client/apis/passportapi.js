@@ -7,7 +7,7 @@ export function loginUser (user) {
     .post(rootUrl + '/login')
     .send({
       username: user.username,
-      password: user.password_hash
+      password: user.password
     })
     .then(res => res.body)
 }
@@ -15,12 +15,24 @@ export function loginUser (user) {
 export function registerUser (user) {
   return request
     .post(rootUrl + '/register')
-    .send(user)
+    .send({
+      first_name: user.firstName,
+      last_name: user.lastName,
+      username: user.username,
+      password_hash: user.password,
+      email: user.email
+    })
     .then(res => res.body)
 }
 
 export function getUser () {
   return request
     .get(rootUrl + '/user')
+    .then(res => res.body)
+}
+
+export function logOffUser () {
+  return request
+    .delete(rootUrl + '/logout')
     .then(res => res.body)
 }

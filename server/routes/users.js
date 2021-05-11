@@ -3,6 +3,8 @@ const router = express.Router()
 
 const db = require('../db/util/users')
 
+// If my author loved me, they would have written me some tests. I'll go stand in the corner and feel ashamed now.
+
 // GET all users
 router.get('/', (req, res) => {
   db.getUsers()
