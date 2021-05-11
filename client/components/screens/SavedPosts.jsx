@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { getSavedPosts } from '../../apis/posts'
 import Post from '../Post'
 import PageLinks from '../PageLinks'
 
-function SavedPosts () {
+function SavedPosts (props) {
   const [posts, setPosts] = useState([])
+
   useEffect(() => {
-    getSavedPosts(1)
+    getSavedPosts(props.user.id)
       .then(result => {
         setPosts(result)
         return null
@@ -33,4 +35,10 @@ function SavedPosts () {
   )
 }
 
-export default SavedPosts
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(SavedPosts)
