@@ -78,7 +78,7 @@ function WhatsHappening (props) {
       <PageLinks />
       <div className="w-screen">
         {/* <IsAuthenticated> */}
-        <h1 className="w-full text-center text-4xl font-bold text-gray-600">Whats Happening</h1>
+        <h1 className="w-full text-center text-4xl font-bold text-gray-600 mt-12">Whats Happening</h1>
         <div className="flex justify-center">
           <div className="w-3/4">
             {usersGroups && <div className="">
