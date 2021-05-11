@@ -72,7 +72,7 @@ function WhatsHappening (props) {
       .catch(err => {
         console.log(err.message)
       })
-  }, [props.user.id])
+  }, [])
 
   return (
     <>
