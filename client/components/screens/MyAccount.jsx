@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Footer from '../Footer'
 
-function MyAccount () {
+function MyAccount (props) {
   return (
     <div>
       <div className='flex justify-center items-center mt-12'>
@@ -41,4 +41,9 @@ function MyAccount () {
   )
 }
 
-export default MyAccount
+function mapStateToProps (state) {
+  return {
+    user: state.user
+}
+
+export default connect(mapStateToProps)(MyAccount)
