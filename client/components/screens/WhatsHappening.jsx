@@ -11,6 +11,7 @@ function WhatsHappening (props) {
   const [groups, setGroups] = useState([])
 
   useEffect(() => {
+    console.log(props.user)
     getUsersGroups(props.user.id)
       .then((res) => {
         setUsersGroups(res)
@@ -28,7 +29,7 @@ function WhatsHappening (props) {
       .catch(err => {
         console.log(err.message)
       })
-  }, [])
+  }, [props.user.id])
 
   return (
     <>
