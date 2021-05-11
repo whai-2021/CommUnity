@@ -25,3 +25,9 @@ export function deletePost (postId) {
     .delete(rootUrl + `/${postId}`)
     .then(res => res.body)
 }
+
+export function savePost (postId, userId) {
+  return request
+    .post(rootUrl + `/saved/${postId}`)
+    .send({ userId })
+}
