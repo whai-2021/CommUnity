@@ -45,6 +45,16 @@ const removeMemberFromGroup = (userId, groupId, db = database) => {
   return db('group_members').where('user_id', userId).where('group_id', groupId).delete()
 }
 
+const deleteAllGroupMembers = (groupId, db = database) => {
+  return getGroupMembers(groupId)
+    .then((members) => {
+      const promises = members.map((member) =>
+        removeMemberFromGroup(member.id, groupId)
+      )
+      return Promise.all(promises)
+    })
+}
+
 // update group
 
 // search groups
@@ -62,5 +72,6 @@ module.exports = {
   addMemberToGroup,
   getGroupMembers,
   removeMemberFromGroup,
-  getUsersGroups
+  getUsersGroups,
+  deleteAllGroupMembers
 }

@@ -1,5 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('group_members', (table) => {
+    table.integer('group_id')
+    table.integer('user_id')
     table.primary(['group_id', 'user_id'])
   })
 }

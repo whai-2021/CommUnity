@@ -10,7 +10,7 @@ export function getGroups () {
 
 export function getUsersGroups (userId) {
   return request
-    .get(rootUrl + '/users/' + userId)
+    .get(rootUrl + '/user/' + userId)
     .then(res => res.body)
 }
 
