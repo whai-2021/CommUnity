@@ -142,4 +142,67 @@ router.delete('/:postId/votes', (req, res) => {
     })
 })
 
+// ADD a post to users saved posts
+router.post('/saved/:postId', (req, res) => {
+  const { postId } = req.params
+  const { userId } = req.body
+  db.savePost(postId, userId)
+    .then(() => {
+      res.status(200).send()
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+      console.log(e)
+      return null
+    })
+})
+
+// DEL a post from users saved posts
+router.delete('/saved/:postId', (req, res) => {
+  const { postId } = req.params
+  const { userId } = req.body
+  db.unsavePost(postId, userId)
+    .then(() => {
+      res.status(200).send()
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+      console.log(e)
+      return null
+    })
+})
+
+// Finds out if user has saved a post
+router.get('/saved/:postId/:userId', (req, res) => {
+  const { postId, userId } = req.params
+
+  db.hasUserSavedPost(postId, userId)
+    .then((result) => {
+      res.json(result)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+      console.log(e)
+      return null
+    })
+})
+
+// GET all saved posts for user
+router.get('/saved/:userId', (req, res) => {
+  const { userId } = req.params
+  db.getSavedPosts(userId)
+    .then((result) => {
+      res.json(result)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+      console.log(e)
+      return null
+    })
+})
+
 module.exports = router

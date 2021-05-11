@@ -12,7 +12,7 @@ function MyAccount () {
 
           <div className='flex justify-between px-6 py-4'>
             <NavLink to='/whatshappening'><button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Groups</button></NavLink>
-            <button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Saved Posts</button>
+            <NavLink to='/savedposts'><button className='bg-blue-300 px-2 py-1 rounded-full font-bold'>Saved Posts</button></NavLink>
           </div>
 
           <div className='px-6 py-4 border-t border-gray-200'>

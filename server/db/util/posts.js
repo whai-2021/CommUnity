@@ -125,6 +125,40 @@ const deletePostsVotes = (postId, db = database) => {
   return db('votes').delete().where('post_id', postId)
 }
 
+// Save Votes
+
+const savePost = (postId, userId, db = database) => {
+  return db('saved_posts')
+    .insert({ post_id: postId, user_id: userId })
+}
+
+const unsavePost = (postId, userId, db = database) => {
+  return db('saved_posts')
+    .where({ post_id: postId, user_id: userId })
+    .delete()
+}
+
+const hasUserSavedPost = (postId, userId, db = database) => {
+  return db('saved_posts').select()
+    .where({ post_id: postId, user_id: userId })
+    .first()
+    .then(result => {
+      if (result === undefined) {
+        return false
+      } else {
+        return true
+      }
+    })
+}
+
+const getSavedPosts = (userId, db = database) => {
+  return db('saved_posts')
+    .where('user_id', userId)
+    .join('posts', 'posts.id', 'saved_posts.post_id')
+    .join('users', 'users.id', 'posts.author_id')
+    .select('posts.id as id', 'users.first_name', 'users.last_name', 'posts.body as body', 'posts.created_at')
+}
+
 module.exports = {
   getPosts,
   getPost,
@@ -137,4 +171,8 @@ module.exports = {
   addVote,
   deleteVote,
   deletePostsVotes
+  savePost,
+  unsavePost,
+  hasUserSavedPost,
+  getSavedPosts
 }
