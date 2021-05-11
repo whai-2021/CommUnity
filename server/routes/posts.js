@@ -78,6 +78,70 @@ router.delete('/:postId', (req, res) => {
       return db.deletePostTags(postId)
     })
     .then(() => {
+      return db.deletePostsVotes(postId)
+    })
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
+// GET a posts votes
+router.get('/:postId/votes', (req, res) => {
+  const postId = Number(req.params.postId)
+  const userId = Number(req.query.userId)
+  db.getPostsVotes(postId)
+    .then((votes) => {
+      const upVotes = votes.filter((vote) => {
+        return vote.vote_type === 'upVote'
+      })
+      const downVotes = votes.filter((vote) => {
+        return vote.vote_type === 'downVote'
+      })
+      const userVote = votes.find((vote) => {
+        return vote.author_id === userId
+      })
+      res.json({ upVotes: upVotes.length, downVotes: downVotes.length, userVote })
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
+// PUT a vote
+router.put('/:postId/votes', (req, res) => {
+  const postId = Number(req.params.postId)
+  const { userId, voteType } = req.body
+  db.voteExists(userId, postId)
+    .then(exists => {
+      if (exists) {
+        return db.deleteVote(userId, postId)
+      }
+      return null
+    })
+    .then(() => {
+      return db.addVote({ post_id: postId, author_id: userId, vote_type: voteType })
+    })
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(e => {
+      console.log(e)
+      res.status(500).send(e.message)
+    })
+})
+
+// DELETE a vote
+router.delete('/:postId/votes', (req, res) => {
+  const postId = Number(req.params.postId)
+  const { userId } = req.body
+  db.deleteVote(userId, postId)
+    .then(() => {
       res.sendStatus(200)
       return null
     })

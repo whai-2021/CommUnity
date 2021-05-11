@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
-import { deletePost, savePost, hasUserSavedPost, unsavePost } from '../apis/posts'
+import { deletePost, savePost, hasUserSavedPost, unsavePost, getPostsVotes, addVote } from '../apis/posts'
 import { getPostTags } from '../apis/tags'
 
 const Post = (props) => {
   const [tags, setTags] = useState([])
+  const [votes, setVotes] = useState({})
   const [savedPost, setSavedPost] = useState(false)
 
   const { getPosts } = props
   const { id, body, created_at: createdAt, first_name: firstName, last_name: lastName, author_id: authorId } = props.post
+
+  const userId = props.user.id
 
   const delPost = () => {
     if (authorId === props.user.id) {
@@ -18,7 +21,27 @@ const Post = (props) => {
     }
   }
 
+  const vote = (voteType) => {
+    addVote(id, userId, voteType)
+      .then(() => {
+        getVotes()
+        return null
+      })
+      .catch(err => console.log(err.message))
+  }
+
+  const getVotes = () => {
+    getPostsVotes(id, userId)
+      .then(res => {
+        setVotes(res)
+        return null
+      })
+      .catch(err => console.log(err.message))
+  }
+
   useEffect(() => {
+    getVotes()
+
     refreshPosts()
   }, [body])
 
@@ -83,12 +106,14 @@ const Post = (props) => {
       <img className="w-full" src="./images/race-shot.jpg" />
       <div className="px-8 py-4 flex justify-between">
         <div className="flex">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-500 cursor-pointer hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('upVote')} className={`${votes.userVote && votes.userVote.vote_type === 'upVote' ? 'text-blue-500 hover:text-blue-600' : 'text-gray-500 hover:text-gray-600'} h-10 w-10  cursor-pointer `} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-500 cursor-pointer hover:text-gray-600 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <h5>{votes.upVotes}</h5>
+          <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('downVote')} className={`${votes.userVote && votes.userVote.vote_type === 'downVote' ? 'text-blue-500 hover:text-blue-600' : 'text-gray-500 hover:text-gray-600'} h-10 w-10  cursor-pointer `} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
           </svg>
+          <h5>{votes.downVotes}</h5>
         </div>
         { !savedPost
           ? <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded' onClick={handleSavePost}>Save Post</button>

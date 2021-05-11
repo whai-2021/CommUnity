@@ -3,7 +3,8 @@ exports.up = function (knex) {
     table.increments('id').primary()
     table.integer('post_id')
     table.integer('author_id')
-    table.boolean('vote_type')
+    table.string('vote_type')
+    table.primary(['author_id', 'post_id'])
   })
 }
 
