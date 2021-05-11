@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PageLinks from '../PageLinks'
-import { getUsersGroups, getGroups, addGroup } from '../../apis/groups'
+import { getUsersGroups, getGroups, addGroup, addUserToGroup } from '../../apis/groups'
 import { IsAuthenticated, NotAuthenticated } from '../Authentication'
 
 // get redux information by console.logging props.user, props.region and props.userGroups
@@ -20,12 +20,25 @@ function WhatsHappening (props) {
       ...formData,
       [e.target.name]: e.target.value
     })
-    console.log(formData)
   }
 
   function handleSubmit (e) {
     e.preventDefault()
     addGroup(formData, 1)
+      .then((newGroup) => {
+        return addUserToGroup(newGroup.id, props.user)
+      })
+      .then(() => {
+        return getGroups()
+      })
+      .then((groups) =>{
+        setGroups(groups)
+        setFormData(initialFormData)
+        return null
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 
   function showForm () {
