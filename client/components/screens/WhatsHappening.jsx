@@ -31,7 +31,7 @@ function WhatsHappening (props) {
       .then(() => {
         return getGroups()
       })
-      .then((groups) =>{
+      .then((groups) => {
         setGroups(groups)
         setFormData(initialFormData)
         return null
