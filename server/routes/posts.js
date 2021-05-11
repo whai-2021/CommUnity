@@ -86,4 +86,18 @@ router.delete('/:postId', (req, res) => {
     })
 })
 
+router.post('/saved/:postId', (req, res) => {
+  const { postId } = req.params
+  const { userId } = req.body
+  db.savePostToUser(postId, userId)
+    .then(() => {
+      res.status(200).send()
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+      return null
+    })
+})
+
 module.exports = router

@@ -107,6 +107,11 @@ const deletePostTags = (postId, db = database) => {
   return db('post_tags').where('post_id', postId).delete()
 }
 
+const savePostToUser = (postId, userId, db = database) => {
+  return db('saved_posts')
+    .insert({ post_id: postId, user_id: userId })
+}
+
 module.exports = {
   getPosts,
   getPost,
@@ -114,5 +119,6 @@ module.exports = {
   deletePost,
   getPostsByGroup,
   getGroupPostsByTag,
-  deletePostTags
+  deletePostTags,
+  savePostToUser
 }
