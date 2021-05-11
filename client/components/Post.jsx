@@ -10,13 +10,15 @@ const Post = (props) => {
   const [savedPost, setSavedPost] = useState(false)
 
   const { getPosts } = props
-  const { id, body, created_at: createdAt, first_name: firstName, last_name: lastName } = props.post
+  const { id, body, created_at: createdAt, first_name: firstName, last_name: lastName, author_id: authorId } = props.post
 
   const userId = props.user.id
 
   const delPost = () => {
-    deletePost(id)
-    getPosts()
+    if (authorId === props.user.id) {
+      deletePost(id)
+      getPosts()
+    }
   }
 
   const vote = (voteType) => {

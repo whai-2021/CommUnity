@@ -169,8 +169,7 @@ function GroupPage (props) {
 function mapStateToProps (state) {
   return {
     region: state.region,
-    user: state.user,
-    userGroups: state.userGroups
+    user: state.user
   }
 }
 
