@@ -67,29 +67,10 @@ router.delete('/:groupId', (req, res) => {
 
   db.deleteGroup(groupId)
     .then(() => {
-      console.log(groupId)
-      // I would make this a single db function for deleteAllGroupMembers(groupId)
-      // then you can test it in isolation and make this route much simpler
-      db.getGroupMembers(groupId)
-        .then((members) => {
-          const promises = members.map((member) =>
-            db.removeMemberFromGroup(member.id, groupId)
-          )
-          Promise.all(promises)
-            .then(() => {
-              res.sendStatus(200)
-              return null
-            })
-            .catch(err => {
-              res.sendStatus(500)
-              console.log(err.message)
-            })
-          return null
-        })
-        .catch(err => {
-          res.sendStatus(500)
-          console.log(err.message)
-        })
+      return db.deleteAllGroupMembers(groupId)
+    })
+    .then(() => {
+      res.sendStatus(200)
       return null
     })
     .catch(err => {
