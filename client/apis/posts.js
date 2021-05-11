@@ -31,3 +31,15 @@ export function savePost (postId, userId) {
     .post(rootUrl + `/saved/${postId}`)
     .send({ userId })
 }
+
+export function unsavePost (postId, userId) {
+  return request
+    .delete(rootUrl + `/saved/${postId}`)
+    .send({ userId })
+}
+
+export function hasUserSavedPost (postId, userId) {
+  return request
+    .get(rootUrl + `/saved/${postId}/${userId}/`)
+    .then(res => res.body)
+}

@@ -54,7 +54,6 @@ function WhatsHappening (props) {
   }
 
   useEffect(() => {
-    console.log(props.user)
     getUsersGroups(props.user.id)
       .then((res) => {
         setUsersGroups(res)
@@ -115,10 +114,10 @@ function WhatsHappening (props) {
         </div>
         {/* </IsAuthenticated>
         <NotAuthenticated> */}
-        <h1 className="w-full text-center text-4xl font-bold text-gray-600 py-8">Oops! You are unable to see this page</h1>
+        {/* <h1 className="w-full text-center text-4xl font-bold text-gray-600 py-8">Oops! You are unable to see this page</h1>
         <p className="text-lg font-semibold text-center">
             Please Login or Register to continue.
-        </p>
+        </p> */}
         {/* </NotAuthenticated> */}
       </div>
     </>

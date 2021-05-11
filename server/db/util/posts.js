@@ -107,9 +107,28 @@ const deletePostTags = (postId, db = database) => {
   return db('post_tags').where('post_id', postId).delete()
 }
 
-const savePostToUser = (postId, userId, db = database) => {
+const savePost = (postId, userId, db = database) => {
   return db('saved_posts')
     .insert({ post_id: postId, user_id: userId })
+}
+
+const unsavePost = (postId, userId, db = database) => {
+  return db('saved_posts')
+    .where({ post_id: postId, user_id: userId })
+    .delete()
+}
+
+const hasUserSavedPost = (postId, userId, db = database) => {
+  return db('saved_posts').select()
+    .where({ post_id: postId, user_id: userId })
+    .first()
+    .then(result => {
+      if (result === undefined) {
+        return false
+      } else {
+        return true
+      }
+    })
 }
 
 module.exports = {
@@ -120,5 +139,7 @@ module.exports = {
   getPostsByGroup,
   getGroupPostsByTag,
   deletePostTags,
-  savePostToUser
+  savePost,
+  unsavePost,
+  hasUserSavedPost
 }

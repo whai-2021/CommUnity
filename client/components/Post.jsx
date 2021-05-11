@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
-import { deletePost } from '../apis/posts'
+import { deletePost, savePost, hasUserSavedPost, unsavePost } from '../apis/posts'
 import { getPostTags } from '../apis/tags'
 
 const Post = (props) => {
   const [tags, setTags] = useState([])
+  const [savedPost, setSavedPost] = useState(false)
 
   const { getPosts } = props
   const { id, body, created_at: createdAt, first_name: firstName, last_name: lastName } = props.post
@@ -22,9 +23,33 @@ const Post = (props) => {
         return null
       })
       .catch(err => console.log(err.message))
+
+    hasUserSavedPost(id, props.user.id)
+      .then(res => {
+        setSavedPost(res)
+        return null
+      })
+      .catch(err => console.log(err.message))
   }, [body])
 
   const createdAtDate = new Date(createdAt)
+
+  function handleSavePost (evt) {
+    evt.preventDefault()
+    savePost(id, props.user.id)
+      .then(() => {
+        return null
+      })
+      .catch(err => console.log(err.message))
+  }
+  function handleUnsavePost (evt) {
+    evt.preventDefault()
+    unsavePost(id, props.user.id)
+      .then(() => {
+        return null
+      })
+      .catch(err => console.log(err.message))
+  }
 
   return (
     <div className="w-full bg-white shadow-md rounded-md">
@@ -57,7 +82,10 @@ const Post = (props) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
           </svg>
         </div>
-        <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded' onClick={() => console.log(props.post)}>Save Post</button>
+        { !savedPost
+          ? <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded' onClick={handleSavePost}>Save Post</button>
+          : <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded' onClick={handleUnsavePost}>Unsave Post</button>
+        }
       </div>
     </div>
   )
