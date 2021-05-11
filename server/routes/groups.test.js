@@ -12,9 +12,8 @@ jest.mock('../db/util/groups', () => ({
 describe('GET /api/v1/groups', () => {
   const fakeGroups = [{
     id: 5,
-    author_id: 10,
-    group_id: 15,
-    body: 'I am testing'
+    name: 'Creative Christians',
+    region_id: 10
   }]
   beforeAll(() => {
     getGroups.mockImplementation(() => {
