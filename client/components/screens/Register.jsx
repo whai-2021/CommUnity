@@ -29,27 +29,23 @@ function Register (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'User Created') {
-          return null
+          return getUser()
         } else {
           setError(result)
           return null
         }
       })
-      .catch(err =>
-        console.log(err.message))
-
-    if (getUser()) {
-      getUser()
-        .then(newUser => {
-          props.dispatch(setUser(newUser))
+      .then(result => {
+        if (result) {
+          props.dispatch(setUser(result))
           props.history.push('/whatshappening')
           return null
-        })
-        .catch(err => {
-          console.log(err.message)
+        } else {
           return null
-        })
-    }
+        }
+      })
+      .catch(err =>
+        console.log('user not sent for registration' + err.message))
   }
 
   return (

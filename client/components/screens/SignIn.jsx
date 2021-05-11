@@ -28,28 +28,25 @@ function SignIn (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'Successfully Authenticated') {
-          return null
+          return getUser()
         } else {
           setError(result)
           return null
         }
       })
-      .catch(err =>
-        console.log('user not sent for registration' + err.message))
-
-    if (getUser()) {
-      getUser()
-        .then(result => {
+      .then(result => {
+        if (result) {
           props.dispatch(setUser(result))
           props.history.push('/whatshappening')
           return null
-        })
-        .catch(err => {
-          console.log(err.message)
+        } else {
           return null
-        })
-    }
+        }
+      })
+      .catch(err =>
+        console.log('user not sent for registration' + err.message))
   }
+
   return (
     <div className="signIn-page mt-24 flex flex-col">
       <div>
