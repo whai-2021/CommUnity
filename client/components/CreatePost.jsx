@@ -1,21 +1,30 @@
+import { connect } from 'react-redux'
 import React, { useState } from 'react'
 import { createPost } from '../apis/posts'
 
 const CreatePost = (props) => {
-  const [post, setPost] = useState({
-    body: '',
-    image: ''
-  })
+  const [imageFile, setImageFile] = useState()
   const [tags, setTags] = useState([])
   const [currentTag, setCurrentTag] = useState('')
   const { changeCreatePost, groupId, getPosts } = props
+  const [post, setPost] = useState({
+    body: '',
+    createdAt: Date.now(),
+    userId: props.user.id,
+    groupId
+  })
+
+  const fileSelected = event => {
+    const file = event.target.files[0]
+    setImageFile(file)
+  }
 
   const handleSubmit = () => {
-    createPost(post, tags)
+    createPost(post, tags, imageFile)
       .then(() => {
         getPosts()
         changeCreatePost()
-        return null()
+        return null
       })
       .catch(err => {
         console.log(err.message)
@@ -46,7 +55,7 @@ const CreatePost = (props) => {
         ...post,
         [name]: value,
         createdAt: Date.now(),
-        userId: 1,
+        userId: props.user.id,
         groupId
       })
     }
@@ -67,6 +76,7 @@ const CreatePost = (props) => {
         )}
       </div>}
       <input className="mt-4 w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600" type="text" placeholder="tags" name="tags" onChange={handleChange} onKeyDown={addTag} value={currentTag}/>
+      <input onChange={fileSelected} type="file" accept="image/*"></input>
       <div className="flex w-full justify-end pt-4">
         <button onClick={changeCreatePost} className='bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>Cancel</button>
         <button className="py-2 px-6 bg-blue-500 shadow-sm hover:bg-blue-600 text-white rounded-md ml-4" onClick={handleSubmit}>Post</button>
@@ -75,4 +85,10 @@ const CreatePost = (props) => {
   )
 }
 
-export default CreatePost
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(CreatePost)

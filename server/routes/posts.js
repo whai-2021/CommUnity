@@ -61,8 +61,8 @@ router.get('/group/:groupId/:tagId', (req, res) => {
 router.post('/', (req, res) => {
   const { post, tags } = req.body
   db.addPost(post, tags)
-    .then(() => {
-      res.sendStatus(200)
+    .then((id) => {
+      res.json(id[0])
       return null
     })
     .catch(e => {

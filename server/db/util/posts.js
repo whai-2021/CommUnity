@@ -40,7 +40,7 @@ const addPost = ({ userId, groupId, body, createdAt }, tags, db = database) => {
             console.log(e.message)
           })
       }
-      return null
+      return postId
     })
     .catch(e => {
       console.log(e.message)

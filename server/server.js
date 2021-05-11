@@ -6,6 +6,7 @@ const groupsRoute = require('./routes/groups')
 const usersRoute = require('./routes/users')
 const postsRoute = require('./routes/posts')
 const tagsRoute = require('./routes/tags')
+const imagesRoute = require('./routes/images')
 
 const server = express()
 
@@ -18,5 +19,6 @@ server.use('/api/v1/users', usersRoute)
 server.use('/api/v1/posts', postsRoute)
 server.use('/api/v1/groups', groupsRoute)
 server.use('/api/v1/tags', tagsRoute)
+server.use('/api/v1/images', imagesRoute)
 
 module.exports = server
