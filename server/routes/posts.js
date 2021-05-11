@@ -78,6 +78,9 @@ router.delete('/:postId', (req, res) => {
       return db.deletePostTags(postId)
     })
     .then(() => {
+      return db.deletePostsVotes(postId)
+    })
+    .then(() => {
       res.sendStatus(200)
       return null
     })
@@ -92,15 +95,16 @@ router.get('/:postId/votes', (req, res) => {
   const userId = Number(req.body.userId)
   db.getPostsVotes(postId)
     .then((votes) => {
-      const upVotes = votes.map((vote) => {
+      const upVotes = votes.filter((vote) => {
         return vote.vote_type === 'upVote'
       })
-      const downVotes = votes.map((vote) => {
+      const downVotes = votes.filter((vote) => {
         return vote.vote_type === 'downVote'
       })
       const userVote = votes.find((vote) => {
         return vote.author_id === userId
       })
+      console.log(upVotes, downVotes)
       res.json({ upVotes: upVotes.length, downVotes: downVotes.length, userVote })
       return null
     })
@@ -113,12 +117,13 @@ router.get('/:postId/votes', (req, res) => {
 router.put('/:postId/votes', (req, res) => {
   const postId = Number(req.params.postId)
   const { userId, voteType } = req.body
-  db.addVote({ postId, userId, voteType })
+  db.addVote({ post_id: postId, author_id: userId, vote_type: voteType })
     .then(() => {
       res.sendStatus(200)
       return null
     })
     .catch(e => {
+      console.log(e)
       res.status(500).send(e.message)
     })
 })

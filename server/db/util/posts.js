@@ -121,6 +121,10 @@ const getPostsVotes = (postId, db = database) => {
   return db('votes').select().where('post_id', postId)
 }
 
+const deletePostsVotes = (postId, db = database) => {
+  return db('votes').delete().where('post_id', postId)
+}
+
 module.exports = {
   getPosts,
   getPost,
@@ -131,5 +135,6 @@ module.exports = {
   deletePostTags,
   getPostsVotes,
   addVote,
-  deleteVote
+  deleteVote,
+  deletePostsVotes
 }
