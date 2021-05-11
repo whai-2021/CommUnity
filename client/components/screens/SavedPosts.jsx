@@ -20,6 +20,7 @@ function SavedPosts (props) {
     <>
       <PageLinks/>
       <div className="grid grid-cols-4 gap-8">
+        <div className="col-span-1 px-8 py-4"></div>
         <div className="col-span-2 px-8 py-4">
           <div className="flex justify-between contents-center pb-8 justify-self-center">
             <h3 className="font-semibold text-2xl text-gray-600">Feed</h3>
@@ -30,6 +31,7 @@ function SavedPosts (props) {
             )}
           </div>
         </div>
+        <div className="col-span-1 px-8 py-4"></div>
       </div>
     </>
   )
