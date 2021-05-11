@@ -31,6 +31,19 @@ router.get('/:userId', (req, res) => {
     })
 })
 
+router.patch('/:userId', (req, res) => {
+  const userId = Number(req.params.userId)
+  const user = req.body
+  db.updateUser(userId, user)
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(e => {
+      res.status(500).send(e.message)
+    })
+})
+
 // DELETE user
 router.delete('/:userId', (req, res) => {
   const userId = Number(req.params.userId)

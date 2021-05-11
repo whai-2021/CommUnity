@@ -39,7 +39,11 @@ const addUser = (user, db = database) => {
       console.log(err.message))
 }
 
-// update user
+const updateUser = (id, user, db = database) => {
+  return db('users')
+    .where('id', id)
+    .update({ first_name: user.first_name, last_name: user.last_name, email: user.email })
+}
 
 const deleteUser = (id, db = database) => {
   return db('users').where('id', id).delete()
@@ -51,5 +55,6 @@ module.exports = {
   getUserById,
   getUserByUsername,
   addUser,
+  updateUser,
   deleteUser
 }
