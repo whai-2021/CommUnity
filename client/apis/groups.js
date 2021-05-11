@@ -37,3 +37,10 @@ export function deleteUserFromGroup (groupId, user) {
     .delete(rootUrl + '/' + groupId + '/members')
     .send(user)
 }
+
+export function addGroup ({ name }, regionId) {
+  return request
+    .post(rootUrl)
+    .send({ name, regionId })
+    .then(res => res.body)
+}

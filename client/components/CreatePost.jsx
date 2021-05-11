@@ -12,8 +12,14 @@ const CreatePost = (props) => {
 
   const handleSubmit = () => {
     createPost(post, tags)
-    getPosts()
-    changeCreatePost()
+      .then(() => {
+        getPosts()
+        changeCreatePost()
+        return null()
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 
   const addTag = (e) => {

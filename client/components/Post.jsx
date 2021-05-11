@@ -21,7 +21,7 @@ const Post = (props) => {
         return null
       })
       .catch(err => console.log(err.message))
-  }, [])
+  }, [body])
 
   const createdAtDate = new Date(createdAt)
 
@@ -42,7 +42,7 @@ const Post = (props) => {
         </div>
         <div className="flex py-2">
           {tags.length > 0 && tags.map((tag) =>
-            <div key={tag.id} className="rounded-full bg-blue-500 text-white px-4 py-2 mr-4">{tag.tag}</div>
+            <div key={tag.id} onClick={() => { getPosts(tag.id) }} className="cursor-pointer rounded-full bg-blue-500 text-white px-4 py-2 mr-4">{tag.tag}</div>
           )}
         </div>
       </div>
