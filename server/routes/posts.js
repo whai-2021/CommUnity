@@ -75,6 +75,9 @@ router.delete('/:postId', (req, res) => {
   const postId = Number(req.params.postId)
   db.deletePost(postId)
     .then(() => {
+      return db.deletePostTags(postId)
+    })
+    .then(() => {
       res.sendStatus(200)
       return null
     })
