@@ -125,6 +125,16 @@ const deletePostsVotes = (postId, db = database) => {
   return db('votes').delete().where('post_id', postId)
 }
 
+const voteExists = (userId, postId, db = database) => {
+  return db('votes')
+    .count('id as n')
+    .where('author_id', userId)
+    .andWhere('post_id', postId)
+    .then(count => {
+      return count[0].n > 0
+    })
+}
+
 // Save Votes
 
 const savePost = (postId, userId, db = database) => {
@@ -170,9 +180,10 @@ module.exports = {
   getPostsVotes,
   addVote,
   deleteVote,
-  deletePostsVotes
+  deletePostsVotes,
   savePost,
   unsavePost,
   hasUserSavedPost,
-  getSavedPosts
+  getSavedPosts,
+  voteExists
 }

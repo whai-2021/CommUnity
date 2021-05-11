@@ -104,7 +104,6 @@ router.get('/:postId/votes', (req, res) => {
       const userVote = votes.find((vote) => {
         return vote.author_id === userId
       })
-      console.log(upVotes, downVotes)
       res.json({ upVotes: upVotes.length, downVotes: downVotes.length, userVote })
       return null
     })
@@ -117,7 +116,16 @@ router.get('/:postId/votes', (req, res) => {
 router.put('/:postId/votes', (req, res) => {
   const postId = Number(req.params.postId)
   const { userId, voteType } = req.body
-  db.addVote({ post_id: postId, author_id: userId, vote_type: voteType })
+  db.voteExists(userId, postId)
+    .then(exists => {
+      if (exists) {
+        return db.deleteVote(userId, postId)
+      }
+      return null
+    })
+    .then(() => {
+      return db.addVote({ post_id: postId, author_id: userId, vote_type: voteType })
+    })
     .then(() => {
       res.sendStatus(200)
       return null
