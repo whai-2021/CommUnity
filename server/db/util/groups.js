@@ -48,9 +48,10 @@ const removeMemberFromGroup = (userId, groupId, db = database) => {
 const deleteAllGroupMembers = (groupId, db = database) => {
   return getGroupMembers(groupId)
     .then((members) => {
-      return members.map((member) =>
+      const promises = members.map((member) =>
         removeMemberFromGroup(member.id, groupId)
       )
+      return Promise.all(promises)
     })
 }
 
