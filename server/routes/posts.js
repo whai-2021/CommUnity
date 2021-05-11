@@ -89,9 +89,19 @@ router.delete('/:postId', (req, res) => {
 // GET a posts votes
 router.get('/:postId/votes', (req, res) => {
   const postId = Number(req.params.postId)
+  const userId = Number(req.body.userId)
   db.getPostsVotes(postId)
     .then((votes) => {
-      res.sendStatus(votes)
+      const upVotes = votes.map((vote) => {
+        return vote.vote_type === 'upVote'
+      })
+      const downVotes = votes.map((vote) => {
+        return vote.vote_type === 'downVote'
+      })
+      const userVote = votes.find((vote) => {
+        return vote.author_id === userId
+      })
+      res.json({upVotes: upVotes.length, downVotes: downVotes.length, userVote })
       return null
     })
     .catch(e => {

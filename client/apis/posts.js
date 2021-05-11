@@ -25,3 +25,24 @@ export function deletePost (postId) {
     .delete(rootUrl + `/${postId}`)
     .then(res => res.body)
 }
+
+export function getPostsVotes (postId, userId) {
+  return request
+    .get(rootUrl + `/${postId}/votes`)
+    .send({ userId })
+    .then(res => res.body)
+}
+
+export function addVote (postId, userId, voteType) {
+  return request
+    .put(rootUrl + `/${postId}/votes`)
+    .send({ userId, voteType })
+    .then(res => res.body)
+}
+
+export function deleteVote (postId, userId) {
+  return request
+    .delete(rootUrl + `/${postId}/votes`)
+    .send({ userId })
+    .then(res => res.body)
+}
