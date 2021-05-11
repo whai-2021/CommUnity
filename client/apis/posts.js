@@ -34,6 +34,7 @@ export function getPostsVotes (postId, userId) {
 }
 
 export function addVote (postId, userId, voteType) {
+  console.log(postId, userId, voteType)
   return request
     .put(rootUrl + `/${postId}/votes`)
     .send({ userId, voteType })

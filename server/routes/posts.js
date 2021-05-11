@@ -101,7 +101,7 @@ router.get('/:postId/votes', (req, res) => {
       const userVote = votes.find((vote) => {
         return vote.author_id === userId
       })
-      res.json({upVotes: upVotes.length, downVotes: downVotes.length, userVote })
+      res.json({ upVotes: upVotes.length, downVotes: downVotes.length, userVote })
       return null
     })
     .catch(e => {

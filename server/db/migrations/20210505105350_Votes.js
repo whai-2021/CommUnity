@@ -4,6 +4,7 @@ exports.up = function (knex) {
     table.integer('post_id')
     table.integer('author_id')
     table.string('vote_type')
+    table.primary(['author_id', 'post_id'])
   })
 }
 
