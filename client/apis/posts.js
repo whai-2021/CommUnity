@@ -28,8 +28,7 @@ export function deletePost (postId) {
 
 export function getPostsVotes (postId, userId) {
   return request
-    .get(rootUrl + `/${postId}/votes`)
-    .send({ userId })
+    .get(rootUrl + `/${postId}/votes?userId=${userId}`)
     .then(res => res.body)
 }
 

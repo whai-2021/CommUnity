@@ -104,11 +104,11 @@ const Post = (props) => {
       <img className="w-full" src="./images/race-shot.jpg" />
       <div className="px-8 py-4 flex justify-between">
         <div className="flex">
-          <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('upVote')} className="h-10 w-10 text-gray-500 cursor-pointer hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('upVote')} className={`${votes.userVote && votes.userVote.vote_type === 'upVote' ? 'text-blue-500 hover:text-blue-600' : 'text-gray-500 hover:text-gray-600'} h-10 w-10  cursor-pointer `} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
           </svg>
           <h5>{votes.upVotes}</h5>
-          <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('downVote')} className="h-10 w-10 text-gray-500 cursor-pointer hover:text-gray-600 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('downVote')} className={`${votes.userVote && votes.userVote.vote_type === 'downVote' ? 'text-blue-500 hover:text-blue-600' : 'text-gray-500 hover:text-gray-600'} h-10 w-10  cursor-pointer `} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
           </svg>
           <h5>{votes.downVotes}</h5>

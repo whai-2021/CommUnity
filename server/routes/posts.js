@@ -92,7 +92,7 @@ router.delete('/:postId', (req, res) => {
 // GET a posts votes
 router.get('/:postId/votes', (req, res) => {
   const postId = Number(req.params.postId)
-  const userId = Number(req.body.userId)
+  const userId = Number(req.query.userId)
   db.getPostsVotes(postId)
     .then((votes) => {
       const upVotes = votes.filter((vote) => {
