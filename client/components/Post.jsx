@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import { getPostTags, deletePost } from '../apis/posts'
+import { deletePost } from '../apis/posts'
+import { getPostTags } from '../apis/tags'
 
 const Post = (props) => {
   const [tags, setTags] = useState([])

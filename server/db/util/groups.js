@@ -53,14 +53,6 @@ const deleteGroup = (id, db = database) => {
   return db('groups').where('id', id).delete()
 }
 
-const getGroupsTags = (groupId, db = database) => {
-  return db('posts')
-    .join('post_tags', 'post_tags.post_id', 'posts.id')
-    .join('tags', 'tags.id', 'post_tags.tag_id')
-    .select('tag', 'tag_id as id')
-    .where('group_id', groupId)
-}
-
 module.exports = {
   getGroups,
   addGroup,
@@ -70,6 +62,5 @@ module.exports = {
   addMemberToGroup,
   getGroupMembers,
   removeMemberFromGroup,
-  getUsersGroups,
-  getGroupsTags
+  getUsersGroups
 }

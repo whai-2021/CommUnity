@@ -39,32 +39,11 @@ router.post('/login', async (req, res, next) => {
   })(req, res, next)
 })
 
-// need to make a log out route
-
 router.post('/register', (req, res) => {
   const newUser = req.body
   users.userExists(newUser.username)
     .then(result => {
       if (result === false) {
-        // eslint-disable-next-line promise/no-nesting
-        users.addUser(newUser)
-          .then(user => {
-            const userDetails = {
-              id: user.id,
-              username: user.username,
-              first_name: user.first_name,
-              last_name: user.last_name
-            }
-            req.logIn(userDetails, err => {
-              if (err) throw err
-              res.json('User Created')
-            })
-            return null
-          })
-          .catch(err => {
-            console.log(err.message)
-            return null
-          })
         return null
       } else {
         res.json('username already exists')
@@ -75,6 +54,32 @@ router.post('/register', (req, res) => {
       console.log(err.message)
       return null
     })
+  req.logIn(addUser(newUser), err => {
+    if (err) throw err
+    res.json('User Created')
+  })
+})
+
+router.delete('/logout', (req, res) => {
+  req.logOut()
+  res.json('Logged Out')
 })
 
 module.exports = router
+
+function addUser (newUser) {
+  users.addUser(newUser)
+    .then(user => {
+      const userDetails = {
+        id: user.id,
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name
+      }
+      return userDetails
+    })
+    .catch(err => {
+      console.log(err.message)
+      return null
+    })
+}

@@ -7,7 +7,7 @@ import { setUser } from '../../actions/user'
 
 const initialForm = {
   username: '',
-  password_hash: ''
+  password: ''
 }
 
 function SignIn (props) {
@@ -28,24 +28,27 @@ function SignIn (props) {
       .then((result) => {
         setForm(initialForm)
         if (result === 'Successfully Authenticated') {
-          // eslint-disable-next-line promise/no-nesting
-          getUser()
-            .then(result => {
-              props.dispatch(setUser(result))
-              props.history.push('/whatshappening')
-              return null
-            })
-            .catch(err => {
-              console.log(err.message)
-              return null
-            })
+          return null
         } else {
           setError(result)
+          return null
         }
-        return null
       })
       .catch(err =>
         console.log('user not sent for registration' + err.message))
+
+    if (getUser()) {
+      getUser()
+        .then(result => {
+          props.dispatch(setUser(result))
+          props.history.push('/whatshappening')
+          return null
+        })
+        .catch(err => {
+          console.log(err.message)
+          return null
+        })
+    }
   }
   return (
     <div className="signIn-page mt-24 flex flex-col">
@@ -68,7 +71,7 @@ function SignIn (props) {
           <div className="flex justify-center mt-4">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label className="block uppercase tracking-wide text-blue-400 text-xs font-bold mb-2" htmlFor="password">Password</label>
-              <input type="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='password_hash' onChange={handleChange} value={form.password_hash} />
+              <input type="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400" required name='password' onChange={handleChange} value={form.password_hash} />
             </div>
           </div>
           <div className="mt-4 flex justify-center">

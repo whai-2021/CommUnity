@@ -10,7 +10,7 @@ export function getGroups () {
 
 export function getUsersGroups (userId) {
   return request
-    .get(rootUrl + '?userId=' + userId)
+    .get(rootUrl + '/users/' + userId)
     .then(res => res.body)
 }
 
@@ -24,15 +24,6 @@ export function getGroupMembers (groupId) {
   return request
     .get(rootUrl + '/' + groupId + '/members')
     .then(res => res.body)
-}
-
-export function getGroupsTags (groupId) {
-  return request
-    .get(rootUrl + '/' + groupId + '/tags')
-    .then(res => {
-      console.log(res.body)
-      return res.body
-    })
 }
 
 export function addUserToGroup (groupId, user) {

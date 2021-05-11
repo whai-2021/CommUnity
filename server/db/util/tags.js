@@ -5,21 +5,16 @@ const getPostTags = (postId, db = database) => {
     .join('tags', 'tags.id', 'post_tags.tag_id')
     .select('tag_id as id', 'tag', 'post_id')
     .where('post_id', postId)
-    .then(res => {
-      return res
-    })
 }
 
 const addTag = (tag, db = database) => {
   return db('tags')
     .insert({ tag: tag.toLowerCase() })
-    .then(id => id)
 }
 
 const addTagToPost = ({ tagId, postId }, db = database) => {
   return db('post_tags')
     .insert({ tag_id: tagId, post_id: postId })
-    .then((tagId) => tagId)
 }
 
 const tagExists = (tag, db = database) => {
@@ -38,10 +33,19 @@ const getTag = (tag, db = database) => {
     .first()
 }
 
+const getGroupsTags = (groupId, db = database) => {
+  return db('posts')
+    .join('post_tags', 'post_tags.post_id', 'posts.id')
+    .join('tags', 'tags.id', 'post_tags.tag_id')
+    .select('tag', 'tag_id as id')
+    .where('group_id', groupId)
+}
+
 module.exports = {
   addTag,
   addTagToPost,
   tagExists,
   getTag,
-  getPostTags
+  getPostTags,
+  getGroupsTags
 }
