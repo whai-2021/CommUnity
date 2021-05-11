@@ -103,11 +103,16 @@ const deletePost = (id, db = database) => {
   return db('posts').where('id', id).delete()
 }
 
+const deletePostTags = (postId, db = database) => {
+  return db('post_tags').where('post_id', postId).delete()
+}
+
 module.exports = {
   getPosts,
   getPost,
   addPost,
   deletePost,
   getPostsByGroup,
-  getGroupPostsByTag
+  getGroupPostsByTag,
+  deletePostTags
 }
