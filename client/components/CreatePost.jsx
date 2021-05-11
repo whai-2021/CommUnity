@@ -76,7 +76,7 @@ const CreatePost = (props) => {
         )}
       </div>}
       <input className="mt-4 w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600" type="text" placeholder="tags" name="tags" onChange={handleChange} onKeyDown={addTag} value={currentTag}/>
-      <input onChange={fileSelected} type="file" accept="image/*"></input>
+      <input className="mt-4" onChange={fileSelected} type="file" accept="image/*"></input>
       <div className="flex w-full justify-end pt-4">
         <button onClick={changeCreatePost} className='bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'>Cancel</button>
         <button className="py-2 px-6 bg-blue-500 shadow-sm hover:bg-blue-600 text-white rounded-md ml-4" onClick={handleSubmit}>Post</button>

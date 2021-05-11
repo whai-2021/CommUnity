@@ -127,7 +127,7 @@ const deletePostsVotes = (postId, db = database) => {
 
 const voteExists = (userId, postId, db = database) => {
   return db('votes')
-    .count('id as n')
+    .count('post_id as n')
     .where('author_id', userId)
     .andWhere('post_id', postId)
     .then(count => {
