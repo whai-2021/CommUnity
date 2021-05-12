@@ -5,17 +5,15 @@ import { getNews } from '../../apis/newsapi'
 
 function NewsFeed () {
   const [news, setNews] = useState([])
-  const [fullArticle, setFullArticle] = useState(false)
+  const [fullArticle, setFullArticle] = useState(null)
 
   function getFullArticle () {
+    console.log(news[fullArticle].content)
     return (
       <div>
-        { news.map((article, index) => {
-          return <div className='py-2' key={index}>
-            <p>{article.content}</p>
-          </div>
-        }) }
-
+        <div className='py-2'>
+          <p>{news[fullArticle].content}</p>
+        </div>
       </div>
     )
   }
@@ -39,8 +37,8 @@ function NewsFeed () {
         <div className='flex justify center grid gap-8 grid-cols-3 m-10'>
           { news.map((article, index) => {
             return <div className='py-2' key={index}>
-              <button onClick={() => setFullArticle(true)} className='text-blue-500 text-left'>{article.title}</button>
-              {fullArticle && getFullArticle()}
+              <button onClick={() => setFullArticle(index)} className='text-blue-500 text-left'>{article.title}</button>
+              {fullArticle === index && getFullArticle()}
               <p>{article.description}</p>
             </div>
           }) }
