@@ -5,7 +5,7 @@ const db = require('../db/util/users')
 
 // If my author loved me, they would have written me some tests. I'll go stand in the corner and feel ashamed now.
 
-// GET all users
+// GET all users - not being used
 router.get('/', (req, res) => {
   db.getUsers()
     .then(users => {
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     })
 })
 
-// GET specific user
+// GET specific user - not being used
 router.get('/:userId', (req, res) => {
   const userId = Number(req.params.userId)
 
@@ -44,7 +44,7 @@ router.patch('/:userId', (req, res) => {
     })
 })
 
-// DELETE user
+// DELETE user - not being used
 router.delete('/:userId', (req, res) => {
   const userId = Number(req.params.userId)
   db.deleteUser(userId)

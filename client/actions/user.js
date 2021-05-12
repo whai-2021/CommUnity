@@ -1,14 +1,13 @@
-function loginUser (user) {
+export function loginUser (user) {
   return {
     type: 'SET_USER',
     user: user
   }
 }
 
-function logOutUser () {
+export function logOutUser () {
   return {
-    type: 'SET_USER',
-    user: false
+    type: 'END_USER'
   }
 }
 

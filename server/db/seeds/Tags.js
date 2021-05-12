@@ -4,7 +4,9 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('tags').insert([
-        { id: 1, tag: 'caleb' }
+        { id: 1, tag: 'Shopping' },
+        { id: 2, tag: 'Food' },
+        { id: 3, tag: 'General' }
       ])
     })
 }
