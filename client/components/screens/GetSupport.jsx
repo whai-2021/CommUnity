@@ -1,4 +1,5 @@
 import React from 'react'
+
 import PageLinks from '../PageLinks'
 import Footer from '../Footer'
 
@@ -11,7 +12,7 @@ function GetSupport () {
         <div className='mt-12 text-center lg:text-left'>
           <h2 className='font-sans text-4xl'>New Place. New Experience.</h2>
           <p className='font-bold mt-5'>Join <em>the</em> Community.</p>
-          <button className='inline-block bg-blue-400 px-10 py-5 rounded-full shadow-lg uppercase text-lg tracking-wide mt-5'>Get Support</button>
+          <button className='inline-block bg-blue-400 px-10 py-5 rounded-full shadow-lg uppercase text-lg tracking-wide mt-5'><a href="http://rc.org.nz/">Get Support</a></button>
         </div>
       </div>
       <Footer />
