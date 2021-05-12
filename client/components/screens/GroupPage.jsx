@@ -114,7 +114,7 @@ function GroupPage (props) {
   return (
     <>
       <div>
-        <img className="w-full" src="./images/Mobile Friendly Banner.png" />
+        <img className="w-full" src={`api/v1/images/group/${groupId}`} />
         <div className='px-8 py-4 flex sticky top-0 bg-white shadow-md justify-between items-center z-50'>
           <div className="flex items-center">
             <Link to='/whatshappening'>

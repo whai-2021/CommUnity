@@ -11,7 +11,7 @@ const upload = multer({ dest: 'uploads/' })
 const db = require('../db/util/images')
 const { uploadImage, downloadImage } = require('../s3')
 
-// POST upload Image
+// POST upload post Image
 router.post('/:postId', upload.single('image'), async (req, res) => {
   const postId = Number(req.params.postId)
   const file = req.file
@@ -33,11 +33,49 @@ router.post('/:postId', upload.single('image'), async (req, res) => {
     })
 })
 
-// GET postsimage Image
+// GET posts image
 router.get('/:postId', (req, res) => {
   const postId = Number(req.params.postId)
 
   db.getPostsImage(postId)
+    .then(image => {
+      const readStream = downloadImage(image.image)
+      readStream.pipe(res)
+    })
+    .catch(err => {
+      res.sendStatus(500)
+      console.log(err.message)
+    })
+
+})
+
+// POST upload group Image
+router.post('/group/:groupId', upload.single('image'), async (req, res) => {
+  const groupId = Number(req.params.groupId)
+  const file = req.file
+  
+  db.addGroupImage(file.filename, groupId)
+    .then(() => {
+      return uploadImage(file)
+    })
+    .then(() => {
+      return unlinkFile(file.path)
+    })
+    .then(() => {
+      res.sendStatus(200)
+      return null
+    })
+    .catch(err => {
+      res.sendStatus(500)
+      console.log(err.message)
+    })
+})
+
+// GET groups image
+router.get('/group/:groupId', (req, res) => {
+  const groupId = Number(req.params.groupId)
+
+  db.getGroupImage(groupId)
     .then(image => {
       const readStream = downloadImage(image.image)
       readStream.pipe(res)

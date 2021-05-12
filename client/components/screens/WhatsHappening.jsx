@@ -10,9 +10,15 @@ function WhatsHappening (props) {
   const [usersGroups, setUsersGroups] = useState('')
   const [groups, setGroups] = useState([])
   const [formVisible, setFormVisible] = useState(false)
+  const [imageFile, setImageFile] = useState()
 
   const initialFormData = { name: '' }
   const [formData, setFormData] = useState(initialFormData)
+
+  const fileSelected = event => {
+      const file = event.target.files[0]
+      setImageFile(file)
+    }
 
   function handleChange (e) {
     e.preventDefault()
@@ -24,7 +30,7 @@ function WhatsHappening (props) {
 
   function handleSubmit (e) {
     e.preventDefault()
-    addGroup(formData, 1)
+    addGroup(formData, 1, imageFile)
       .then((newGroup) => {
         return addUserToGroup(newGroup.id, props.user)
       })
@@ -37,7 +43,7 @@ function WhatsHappening (props) {
         return null
       })
       .catch(err => {
-        console.log(err.message)
+        console.log(err)
       })
   }
 
@@ -47,6 +53,7 @@ function WhatsHappening (props) {
         <form>
           <label>Group Name: </label>
           <input name='name' type='text' value={formData.name} onChange={handleChange} className='bg-gray-200'></input>
+          <input className="mt-4" onChange={fileSelected} type="file" accept="image/*"></input>
           <button className='rounded-full border-2 text-black bg-blue-400 focus:outline-none focus:border-blue-400' onClick={handleSubmit}>Create</button>
         </form>
       </div>
