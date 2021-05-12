@@ -1,4 +1,5 @@
 import request from 'superagent'
+import { uploadGroupImage } from './images'
 
 const rootUrl = '/api/v1/groups'
 
@@ -29,7 +30,7 @@ export function getGroupMembers (groupId) {
 export function addUserToGroup (groupId, user) {
   return request
     .put(rootUrl + '/' + groupId + '/members')
-    .send(user)
+    .send({id: user.id})
 }
 
 export function deleteUserFromGroup (groupId, user) {
@@ -38,9 +39,16 @@ export function deleteUserFromGroup (groupId, user) {
     .send(user)
 }
 
-export function addGroup ({ name }, regionId) {
+export function addGroup ({ name }, regionId, image) {
+  console.log(image)
   return request
     .post(rootUrl)
     .send({ name, regionId })
-    .then(res => res.body)
+    .then(res => {
+      console.log(res.body)
+      if (image) {
+        uploadGroupImage(image, res.body.id)
+      }
+      return res.body
+    } )
 }
