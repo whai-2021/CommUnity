@@ -9,12 +9,12 @@ const getPostTags = (postId, db = database) => {
 
 const addTag = (tag, db = database) => {
   return db('tags')
-    .insert({ tag: tag.toLowerCase() })
+    .insert({ tag: tag.toLowerCase() }, 'id')
 }
 
 const addTagToPost = ({ tagId, postId }, db = database) => {
   return db('post_tags')
-    .insert({ tag_id: tagId, post_id: postId })
+    .insert({ tag_id: tagId, post_id: postId }, 'id')
 }
 
 const tagExists = (tag, db = database) => {

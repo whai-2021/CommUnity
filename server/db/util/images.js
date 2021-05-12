@@ -5,7 +5,7 @@ const getPostsImage = (postId, db = database) => {
 }
 
 const addPostImage = (image, postId, db = database) => {
-  return db('post_images').insert({ image, post_id: postId })
+  return db('post_images').insert({ image, post_id: postId }, 'id')
 }
 
 const getGroupImage = (groupId, db = database) => {
@@ -13,7 +13,7 @@ const getGroupImage = (groupId, db = database) => {
 }
 
 const addGroupImage = (image, groupId, db = database) => {
-  return db('group_images').insert({ image, group_id: groupId })
+  return db('group_images').insert({ image, group_id: groupId }, 'id')
 }
 
 module.exports = {

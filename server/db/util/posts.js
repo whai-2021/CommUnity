@@ -28,7 +28,7 @@ const getPost = (id, db = database) => {
 }
 
 const addPost = ({ userId, groupId, body, createdAt }, tags, db = database) => {
-  return db('posts').insert({ author_id: userId, group_id: groupId, body, created_at: createdAt })
+  return db('posts').insert({ author_id: userId, group_id: groupId, body, created_at: createdAt }, 'id')
     .then(postId => {
       if (tags) {
         const promises = addTagsToPost(tags, postId)
@@ -110,7 +110,7 @@ const deletePostTags = (postId, db = database) => {
 // Post Votes
 
 const addVote = (vote, db = database) => {
-  return db('votes').insert(vote)
+  return db('votes').insert(vote, 'id')
 }
 
 const deleteVote = (userId, postId, db = database) => {
@@ -139,7 +139,7 @@ const voteExists = (userId, postId, db = database) => {
 
 const savePost = (postId, userId, db = database) => {
   return db('saved_posts')
-    .insert({ post_id: postId, user_id: userId })
+    .insert({ post_id: postId, user_id: userId }, 'id')
 }
 
 const unsavePost = (postId, userId, db = database) => {

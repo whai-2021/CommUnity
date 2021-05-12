@@ -32,7 +32,7 @@ const addUser = (user, db = database) => {
       user.password_hash = result
       // eslint-disable-next-line promise/no-nesting
       return db('users')
-        .insert(user)
+        .insert(user, 'id')
         .then((id) => getUserById(id[0]))
     })
     .catch(err =>
