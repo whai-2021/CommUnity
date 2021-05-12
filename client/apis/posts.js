@@ -1,5 +1,6 @@
 import request from 'superagent'
 const rootUrl = '/api/v1/posts'
+import { uploadPostImage } from './images'
 
 export function getPostsByGroup (groupId) {
   return request
@@ -13,11 +14,15 @@ export function getPostsByTag (tagId, groupId) {
     .then(res => res.body)
 }
 
-export function createPost (post, tags) {
+export function createPost (post, tags, image) {
   return request
     .post(rootUrl)
     .send({ post, tags })
-    .then(res => res.body)
+    .then(res => {
+      if (image) {
+        return uploadPostImage(image, res.body)
+      } return res.body
+    })
 }
 
 export function deletePost (postId) {
@@ -33,7 +38,6 @@ export function getPostsVotes (postId, userId) {
 }
 
 export function addVote (postId, userId, voteType) {
-  console.log(postId, userId, voteType)
   return request
     .put(rootUrl + `/${postId}/votes`)
     .send({ userId, voteType })

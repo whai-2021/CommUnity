@@ -4,7 +4,7 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('votes').insert([
-        { id: 1, vote_type: 'upVote', post_id: 1, author_id: 1 }
+        { vote_type: 'upVote', post_id: 1, author_id: 1 }
       ])
     })
 }
