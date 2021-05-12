@@ -110,7 +110,7 @@ const deletePostTags = (postId, db = database) => {
 // Post Votes
 
 const addVote = (vote, db = database) => {
-  return db('votes').insert(vote, 'id')
+  return db('votes').insert(vote, 'post_id')
 }
 
 const deleteVote = (userId, postId, db = database) => {
@@ -139,7 +139,7 @@ const voteExists = (userId, postId, db = database) => {
 
 const savePost = (postId, userId, db = database) => {
   return db('saved_posts')
-    .insert({ post_id: postId, user_id: userId }, 'id')
+    .insert({ post_id: postId, user_id: userId }, 'post_id')
 }
 
 const unsavePost = (postId, userId, db = database) => {

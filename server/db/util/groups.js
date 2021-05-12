@@ -35,7 +35,7 @@ const getUsersGroups = (userId, db = database) => {
 }
 
 const addMemberToGroup = (userId, groupId, db = database) => {
-  return db('group_members').insert({ group_id: groupId, user_id: userId })
+  return db('group_members').insert({ group_id: groupId, user_id: userId }, 'id')
     .then((groupId) => {
       return getGroupMembers(groupId)
     })
