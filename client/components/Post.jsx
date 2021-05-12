@@ -2,17 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { deletePost, savePost, hasUserSavedPost, unsavePost, getPostsVotes, addVote } from '../apis/posts'
+import { getPostsImage } from '../apis/images'
 import { getPostTags } from '../apis/tags'
 
 const Post = (props) => {
   const [tags, setTags] = useState([])
   const [votes, setVotes] = useState({})
   const [savedPost, setSavedPost] = useState(false)
+  const [image, setImage] = useState('')
 
   const { getPosts } = props
   const { id, body, created_at: createdAt, first_name: firstName, last_name: lastName, author_id: authorId } = props.post
 
   const userId = props.user.id
+
+  const getImage = () => {
+    getPostsImage(id)
+      .then((image) => {
+        if(image) {
+          setImage(URL.createObjectURL(image))
+        }
+        return null
+      })
+      .catch(err => console.log(err.message))
+  }
 
   const delPost = () => {
     if (authorId === props.user.id) {
@@ -41,7 +54,7 @@ const Post = (props) => {
 
   useEffect(() => {
     getVotes()
-
+    getImage()
     refreshPosts()
   }, [body])
 
@@ -103,7 +116,7 @@ const Post = (props) => {
           )}
         </div>
       </div>
-      <img className="w-full" src={`/api/v1/images/${id}`} />
+      {image && <img className="w-full" src={image} />}
       <div className="px-8 py-4 flex justify-between">
         <div className="flex flex-row content-center">
           <svg xmlns="http://www.w3.org/2000/svg" onClick={() => vote('upVote')} className={`${votes.userVote && votes.userVote.vote_type === 'upVote' ? 'text-blue-500 hover:text-blue-600' : 'text-gray-500 hover:text-gray-600'} h-10 w-10  cursor-pointer `} fill="none" viewBox="0 0 24 24" stroke="currentColor">
