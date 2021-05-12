@@ -16,7 +16,9 @@ exports.seed = function (knex) {
         { id: 1, last_name: 'Ion', first_name: 'Caleb', username: 'calebhino', password_hash: calebHash, email: 'calebionpersonal@gmail.com' },
         { id: 2, last_name: 'Guiang', first_name: 'Ysabel', username: 'ysabel', password_hash: ysabelHash, email: 'yg@yahoo.com' },
         { id: 3, last_name: 'Leen', first_name: 'Dainy', username: 'dainy', password_hash: dainyHash, email: 'dai@yahoo.com' },
-        { id: 4, last_name: 'Puri', first_name: 'Jatin', username: 'jatin', password_hash: jatinHash, email: 'jatin@yahoo.com' }
+        { id: 4, last_name: 'Puri', first_name: 'Jatin', username: 'jatin', password_hash: jatinHash, email: 'jatin@yahoo.com' },
+        { id: 5, last_name: 'John', first_name: 'Wick', username: 'johnwick', password_hash: jatinHash, email: 'jw@yahoo.com' }
+
       ])
     })
 }

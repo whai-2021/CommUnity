@@ -9,7 +9,7 @@ jest.mock('../db/util/groups', () => ({
   getGroups: jest.fn()
 }))
 
-describe('GET /api/v1/groups', () => {
+describe('GET /', () => {
   const fakeGroups = [{
     id: 5,
     name: 'Creative Christians',
@@ -41,3 +41,5 @@ describe('GET /api/v1/groups', () => {
       })
   })
 })
+
+describe
