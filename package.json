@@ -6,13 +6,16 @@
   "main": "server/index.js",
   "author": "EDA",
   "license": "ISC",
+
   "scripts": {
     "client": "webpack serve --config ./client/webpack.config.js --hot",
     "dev": "run-p dev:client dev:server",
     "dev:client": "npm run webpack -- --watch",
     "dev:server": "nodemon server",
     "start": "node server",
-    "build": "npm run webpack",
+    "build": "run-p build:client build:server",
+    "build:client": "npm run webpack -- --mode production",
+    "build:server": "npm run knex -- migrate:latest",
     "server": "node server",
     "test": "jest --watchAll",
     "test:watch": "jest --watchAll",

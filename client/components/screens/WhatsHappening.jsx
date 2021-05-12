@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PageLinks from '../PageLinks'
 import { getUsersGroups, getGroups, addGroup, addUserToGroup } from '../../apis/groups'
-// import { IsAuthenticated, NotAuthenticated } from '../Authentication'
+import { IsAuthenticated, NotAuthenticated } from '../Authentication'
 
-// get redux information by console.logging props.user, props.region and props.userGroups
 function WhatsHappening (props) {
   const [usersGroups, setUsersGroups] = useState('')
   const [groups, setGroups] = useState([])
@@ -93,7 +92,7 @@ function WhatsHappening (props) {
     <>
       <PageLinks />
       <div className="w-screen">
-        {/* <IsAuthenticated> */}
+        <IsAuthenticated>
         <h1 className="w-full text-center text-4xl font-bold text-gray-600 mt-12">Whats Happening</h1>
         <div className="flex justify-center">
           <div className="w-3/4">
@@ -130,13 +129,13 @@ function WhatsHappening (props) {
             </div>
           </div>
         </div>
-        {/* </IsAuthenticated>
-        <NotAuthenticated> */}
-        {/* <h1 className="w-full text-center text-4xl font-bold text-gray-600 py-8">Oops! You are unable to see this page</h1>
+        </IsAuthenticated>
+        <NotAuthenticated>
+        <h1 className="w-full text-center text-4xl font-bold text-gray-600 py-8">Oops! You are unable to see this page</h1>
         <p className="text-lg font-semibold text-center">
             Please Login or Register to continue.
-        </p> */}
-        {/* </NotAuthenticated> */}
+        </p>
+        </NotAuthenticated>
       </div>
     </>
   )
