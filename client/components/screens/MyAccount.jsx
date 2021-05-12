@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getUsersGroups } from '../../apis/groups'
 import { updateUser } from '../../apis/users'
 import { setUser } from '../../actions/user'
+import PageLinks from '../PageLinks'
 
 import Footer from '../Footer'
 
@@ -12,7 +13,7 @@ function MyAccount (props) {
   const initialForm = { firstName: firstName, lastName: lastName, email: email }
   const [groups, setGroups] = useState([])
   const [form, setForm] = useState(initialForm)
-  
+
   useEffect(() => {
     getUsersGroups(id)
       .then(result => {
@@ -43,9 +44,9 @@ function MyAccount (props) {
 
   function handleSubmit (event) {
     event.preventDefault()
-    updateUser(id,form)
+    updateUser(id, form)
       .then(() => {
-        const newDetails = {...props.user, first_name: form.firstName, last_name: form.lastName, email: form.email }
+        const newDetails = { ...props.user, first_name: form.firstName, last_name: form.lastName, email: form.email }
         return props.dispatch(setUser(newDetails))
       })
       .then(() => {
@@ -57,6 +58,7 @@ function MyAccount (props) {
 
   return (
     <div>
+      <PageLinks currentPage="account" />
       <div className='flex justify-center items-center mt-12'>
         <div className='w-2/3 flex flex-col shadow-lg rounded-lg overflow-hidden'>
           <div className='bg-gray-200 text-gray-700 text-lg px-6 py-4'>MY ACCOUNT</div>

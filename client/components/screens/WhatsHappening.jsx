@@ -90,7 +90,7 @@ function WhatsHappening (props) {
 
   return (
     <>
-      <PageLinks />
+      <PageLinks currentPage="whatshappening"/>
       <div className="w-screen">
         <IsAuthenticated>
         <h1 className="w-full text-center text-4xl font-bold text-gray-600 mt-12">Whats Happening</h1>
@@ -102,7 +102,7 @@ function WhatsHappening (props) {
                 {!formVisible && <button onClick={() => setFormVisible(true)} className="py-2 px-6 bg-blue-500 shadow-sm hover:bg-blue-600 text-white rounded-md ml-4">+ Create Group</button>}
                 {formVisible && showForm()}
               </div>
-              <div className="grid gap-8 grid-cols-3">
+              <div className="grid gap-8 grid-cols-1 lg:grid-cols-3">
                 {usersGroups.map((group) => (
                   <Link key={group.id} to={`/whatshappening/${group.id}`}>
                     <div key={group.id} className="shadow-md rounded-lg">
@@ -116,7 +116,7 @@ function WhatsHappening (props) {
             }
             <div>
               <h2 className="py-8 text-2xl font-semibold text-gray-600">All Groups</h2>
-              <div className="grid gap-8 grid-cols-3 pb-16">
+              <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 pb-16">
                 {groups.map((group) => (
                   <Link key={group.id} to={`/whatshappening/${group.id}`}>
                     <div key={group.id} className="shadow-md rounded-lg">
