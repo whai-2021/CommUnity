@@ -14,7 +14,7 @@ test('can return all posts', () => {
   expect.assertions(1)
   return getPosts(testDb)
     .then(posts => {
-      expect(posts).toHaveLength(1)
+      expect(posts).toHaveLength(6)
       return null
     })
 })

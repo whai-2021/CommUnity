@@ -10,7 +10,7 @@ beforeEach(() => testDb.seed.run())
 
 // getUsers
 test('can get all users', () => {
-  const expected = 4
+  const expected = 5
   return db.getUsers(testDb)
     .then(users => {
       return expect(users).toHaveLength(expected)

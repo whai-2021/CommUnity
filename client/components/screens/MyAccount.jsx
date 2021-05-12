@@ -13,7 +13,7 @@ function MyAccount (props) {
   const initialForm = { firstName: firstName, lastName: lastName, email: email }
   const [groups, setGroups] = useState([])
   const [form, setForm] = useState(initialForm)
-  
+
   useEffect(() => {
     getUsersGroups(id)
       .then(result => {
@@ -44,9 +44,9 @@ function MyAccount (props) {
 
   function handleSubmit (event) {
     event.preventDefault()
-    updateUser(id,form)
+    updateUser(id, form)
       .then(() => {
-        const newDetails = {...props.user, first_name: form.firstName, last_name: form.lastName, email: form.email }
+        const newDetails = { ...props.user, first_name: form.firstName, last_name: form.lastName, email: form.email }
         return props.dispatch(setUser(newDetails))
       })
       .then(() => {
