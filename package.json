@@ -17,11 +17,13 @@
     "start": "node server",
     "build": "run-p build:client build:server",
     "build:client": "npm run webpack -- --mode production",
+    "build:css": "npm run devwebpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
     "server": "node server",
     "test": "jest --watchAll",
     "test:watch": "jest --watchAll",
     "webpack": "webpack --config ./client/webpack.config.js",
+    "devwebpack": "webpack --config ./client/webpack.config.dev.js",
     "lint": "eslint --ext .js,.jsx .",
     "knex": "knex --knexfile ./server/db/knexfile.js"
   },
