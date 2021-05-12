@@ -10,7 +10,7 @@ function NewsFeed () {
   function getFullArticle () {
     return (
       <div>
-        { news.map((article, index) => {
+        { news.find((article, index) => {
           return <div className='py-2' key={index}>
             <p>{article.content}</p>
           </div>
