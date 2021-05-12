@@ -28,8 +28,7 @@ router.post('/:postId', upload.single('image'), async (req, res) => {
       return null
     })
     .catch(err => {
-      res.sendStatus(500)
-      console.log(err.message)
+      res.status(500).send(err.message)
     })
 })
 
@@ -43,8 +42,11 @@ router.get('/:postId', (req, res) => {
       readStream.pipe(res)
     })
     .catch(err => {
-      res.sendStatus(500)
-      console.log(err.message)
+      if (err.message === "Cannot read property 'image' of undefined") {
+        res.sendStatus(204)
+      } else {
+        res.status(500).send(err.message)
+      }
     })
 
 })
@@ -66,8 +68,7 @@ router.post('/group/:groupId', upload.single('image'), async (req, res) => {
       return null
     })
     .catch(err => {
-      res.sendStatus(500)
-      console.log(err.message)
+      res.status(500).send(err.message)
     })
 })
 
@@ -81,8 +82,11 @@ router.get('/group/:groupId', (req, res) => {
       readStream.pipe(res)
     })
     .catch(err => {
-      res.sendStatus(500)
-      console.log(err.message)
+      if (err.message === "Cannot read property 'image' of undefined") {
+        res.sendStatus(204)
+      } else {
+        res.status(500).send(err.message)
+      }
     })
 
 })
