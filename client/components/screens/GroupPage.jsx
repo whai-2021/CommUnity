@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { getGroupById, getGroupMembers, addUserToGroup, deleteUserFromGroup } from '../../apis/groups'
 import { getPostsByGroup, getPostsByTag } from '../../apis/posts'
 import { getGroupsTags } from '../../apis/tags'
-import { IsAuthenticated, NotAuthenticated } from '../Authentication'
 import { getGroupsImage } from '../../apis/images'
+import { IsAuthenticated, NotAuthenticated } from '../Authentication'
 import Post from '../Post'
 import CreatePost from '../CreatePost'
 
@@ -129,7 +129,7 @@ function GroupPage (props) {
 
   return (
     <>
-      <IsAuthenticated>
+    <IsAuthenticated>
       <div>
         {image && <div className="w-full h-96 bg-cover bg-gray-100" style={{backgroundImage: `url(${image})`}}></div>}
         <div className='px-8 py-4 flex sticky top-0 bg-white shadow-md justify-between items-center z-50'>
@@ -156,7 +156,6 @@ function GroupPage (props) {
                 }} className={`${currentTag === tag.id ? 'bg-blue-500 text-white' : 'bg-transparent text-blue-700'} hover:bg-blue-600  font-semibold hover:text-white w-full py-2 px-4 border border-blue-500 hover:border-transparent rounded`}>{tag.tag}</button>
               )}
             </div>
-            { isUserInGroup() ? <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xl hover:text-white py-2 px-12 rounded' onClick={handleClick}>Leave Group</button> : <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xl hover:text-white py-2 px-12 rounded' onClick={handleClick}>Join Group</button> }
           </div>
           <div className='block lg:hidden px-8 py-4 flex flex-col bg-white'>
             <h3 className="font-semibold text-2xl text-gray-600 pb-4">Group Members - {members.length}</h3>
@@ -171,17 +170,11 @@ function GroupPage (props) {
               <h3 className="font-semibold text-2xl text-gray-600">Feed</h3>
               {!createPost && <button onClick={changeCreatePost} className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg hover:text-white py-2 px-4 rounded'>Create Post</button>}
             </div>
-            <div className="col-span-2 px-8 py-4">
-              <div className="flex justify-between contents-center pb-8">
-                <h3 className="font-semibold text-2xl text-gray-600">Feed</h3>
-                {!createPost && <button onClick={changeCreatePost} className='bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg hover:text-white py-2 px-4 rounded'>Create Post</button>}
-              </div>
-              <div className="grid grid-cols-1 gap-8">
-                {createPost && <CreatePost getPosts={getPosts} changeCreatePost={changeCreatePost} groupId={groupId} />}
-                {posts.length > 0 && posts.map((post) =>
-                  <Post post={post} key={post.post_id} getPosts={getPosts}/>
-                )}
-              </div>
+            <div className="grid grid-cols-1 gap-8">
+              {createPost && <CreatePost getPosts={getPosts} changeCreatePost={changeCreatePost} groupId={groupId} />}
+              {posts.length > 0 && posts.map((post) =>
+                <Post post={post} key={post.post_id} getPosts={getPosts}/>
+              )}
             </div>
           </div>
           <div className='hidden lg:block px-8 py-4 flex flex-col lg:sticky lg:top-24 lg:h-screen bg-white'>
@@ -193,14 +186,8 @@ function GroupPage (props) {
             </div>
           </div>
         </div>
-        </div>
+      </div>
       </IsAuthenticated>
-      <NotAuthenticated>
-        <h1 className="w-full text-center text-4xl font-bold text-gray-600 py-8">Oops! You are unable to see this page</h1>
-        <p className="text-lg font-semibold text-center">
-            Please Login or Register to continue.
-        </p>
-      </NotAuthenticated>
     </>
   )
 }
