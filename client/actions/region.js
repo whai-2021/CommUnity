@@ -1,4 +1,4 @@
-function changeRegion (region) {
+export function changeRegion (region) {
   return {
     type: 'SET_REGION',
     region: region
