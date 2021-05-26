@@ -28,3 +28,9 @@ I spent most of my time working on adding Authorisation and Authentication. We w
 I also spent some time in allowing users to save and unsave posts. Their saved posts could then be accessed through their account page. 
 
 #### [Dainy](https://github.com/dainyleen)'s experience
+The concept of Commu{unity} is what attracted me to choose to work on this project. I find the concept to be relatable. I mostly work on the front-end development such as the styling of the login, registration and the account page using Tailwind CSS. I also helped in creating the toggle menu for the landing page as well as helped in designing the Get Support page. 
+
+Moreover, one thing that EDA instilled in us as junior web developers is the importance of testing. I helped in creating tests for the DB and Routes functions from the server side. 
+
+Lastly, We practiced Agile methodologies within our team all throughout the time we were working on this project. Our typical day started and ended with a group meeting. We have also demonstrated showing empathy, embracing diversity and giving & receiving feedback.
+
