@@ -23,6 +23,8 @@ One of the biggest challenges I faced was touching AWS for the first time. It wa
 
 
 #### [Ysabel](https://github.com/ysabel-guiang)'s experience
+I spent most of my time working on adding Authorisation and Authentication. We wanted users to be able to create and account and login. If a user was logged in, they would be able to access the "What's happening" section of our website and interact with different groups. In order to implement this, I had to user Passport.js in our middleware to authenticate users.
 
+I also spent some time in allowing users to save and unsave posts. Their saved posts could then be accessed through their account page. 
 
 #### [Dainy](https://github.com/dainyleen)'s experience
