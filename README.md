@@ -20,7 +20,7 @@ One of the biggest challenges I faced was touching AWS for the first time. It wa
 ![Gif of uploading image](https://i.imgur.com/ldET7AY.gif)
 
 #### [Jatin](https://github.com/jatin-puri-coder)'s experience
-
+My goals on this project was to get accustomed to using a CSS framwork and calling an external API on the webpage. During this project I worked mainly on the fornt-end. I created a few react components, got comfortable using tailwind(CSS) and created a news section which displayed the latest articles in New Zealand via NewsAPI. 
 
 #### [Ysabel](https://github.com/ysabel-guiang)'s experience
 I spent most of my time working on adding Authorisation and Authentication. We wanted users to be able to create and account and login. If a user was logged in, they would be able to access the "What's happening" section of our website and interact with different groups. In order to implement this, I had to user Passport.js in our middleware to authenticate users.
